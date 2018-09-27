@@ -171,30 +171,14 @@
                         今天晚上我请客！
                     </div>
                 </div>
-                <div class="winui-message-item">
-                    <h2>马化腾有问题请教</h2>
-                    <div class="content">
-                        QQ如何发送语音？
-                    </div>
-                </div>
-                <div class="winui-message-item">
-                    <h2>你有一条新留言</h2>
-                    <div class="content">
-                        牛逼
-                    </div>
-                </div>
+
                 <div class="winui-message-item">
                     <h2>好友验证</h2>
                     <div class="content">
                         高圆圆请求加你为好友
                     </div>
                 </div>
-                <div class="winui-message-item">
-                    <h2>群系统消息</h2>
-                    <div class="content">
-                        李彦宏邀请你加入百度AI技术交流群
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="winui-shortcut">
@@ -203,66 +187,7 @@
                 <i class="fa fa-cog"></i>
                 <span>设置</span>
             </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
-            <div class="winui-shortcut-item">
-                <i class="fa fa-cog"></i>
-                <span>设置</span>
-            </div>
+
         </div>
     </div>
 
