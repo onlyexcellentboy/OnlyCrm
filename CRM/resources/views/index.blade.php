@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="renderer" content="webkit">
-    <title>WinAdmin - Win10风格管理系统</title>
+    <title>win10 - 客户关系管理</title>
     <link href="./lib/layui/css/layui.css" rel="stylesheet" />
     <link href="./lib/animate/animate.min.css" rel="stylesheet" />
     <link href="./lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
