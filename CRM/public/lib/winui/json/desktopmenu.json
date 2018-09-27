@@ -48,7 +48,7 @@
     },
     {
       "title": "角色管理",
-      "pageURL": "views/role/list.html",
+      "pageURL": "http://www.crm.com/role",
       "name": "角色管理",
       "icon": "fa-th-large",
       "openType": 2,
