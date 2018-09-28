@@ -1,4 +1,7 @@
-﻿<div style="width:600px;margin:0 auto;padding-top:20px;">
+﻿<ins class="adsbygoogle" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+
+<div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
+<div style="width:600px;margin:0 auto;padding-top:20px;">
     <form class="layui-form" action="">
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单</label>
@@ -64,6 +67,7 @@
         </div>
     </form>
     <div class="tips">Tips：1.系统菜单不可以删除 2.窗口标题若不填则默认和菜单名称相同</div>
+</div>
 </div>
 <script>
     layui.use(['form','layer'], function (form) {
