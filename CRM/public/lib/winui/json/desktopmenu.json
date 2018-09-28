@@ -37,7 +37,7 @@
     },
     {
       "title": "系统菜单",
-      "pageURL": "views/menu/list_iframe.html",
+      "pageURL": "http://www.crm.com/systemMenu",
       "name": "系统菜单",
       "icon": "fa-navicon",
       "openType": 2,

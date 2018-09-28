@@ -21,3 +21,6 @@ Route::get( 'role' , 'RoleController@roleList' );
 
 # 角色编辑
 Route::get( 'edit' , 'RoleController@roleEdit' );
+
+# 系统菜单
+Route::get( 'systemMenu' , 'SystemController@menuList' );
