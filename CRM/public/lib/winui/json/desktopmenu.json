@@ -57,6 +57,16 @@
       "id": 58
     },
     {
+      "title": "合同管理",
+      "pageURL": "http://www.crm.com/pact",
+      "name": "合同管理",
+      "icon": "fa-github-square",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
+    },
+    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",

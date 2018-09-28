@@ -39,3 +39,6 @@ Route::get( 'adminEdit' , 'AdminController@adminEdit' );
 
 # 订单列表
 Route::get( 'order' , 'OrderController@orderList' );
+
+# 合同列表
+Route::get( 'pact' , 'PactController@pactList' );

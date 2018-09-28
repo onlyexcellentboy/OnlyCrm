@@ -11,7 +11,7 @@
     //表格渲染
     table.render({
         id: tableId,
-        elem: '#admin',
+        elem: '#pact',
         url: '../../json/rolelist.json',
         //height: 'full-65', //自适应高度
         //size: '',   //表格尺寸，可选值sm lg
@@ -29,7 +29,7 @@
         ]]
     });
     //监听工具条
-    table.on('tool(admintable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('tool(pacttable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值
         var tr = obj.tr; //获得当前行 tr 的DOM对象
