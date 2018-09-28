@@ -10,4 +10,9 @@ class SystemController extends Controller
     public function menuList(){
         return view( 'systemMenu' );
     }
+
+    # 编辑菜单
+    public function menuEdit(){
+        return view( 'menuEdit' );
+    }
 }

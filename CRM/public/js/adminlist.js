@@ -11,7 +11,7 @@
     //表格渲染
     table.render({
         id: tableId,
-        elem: '#role',
+        elem: '#admin',
         url: '../../json/rolelist.json',
         //height: 'full-65', //自适应高度
         //size: '',   //表格尺寸，可选值sm lg
@@ -29,7 +29,7 @@
         ]]
     });
     //监听工具条
-    table.on('tool(roletable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('tool(admintable)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值
         var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -45,16 +45,16 @@
             var index = layer.load(1);
             $.ajax({
                 type: 'get',
-                url: 'http://www.crm.com/roleEdit?id=' + data.id,
+                url: 'http://www.crm.com/adminEdit?id=' + data.id,
                 async: true,
                 success: function (data) {
                     layer.close(index);
                     content = data;
                     //从桌面打开
                     top.winui.window.open({
-                        id: 'editRole',
+                        id: 'editAdmin',
                         type: 1,
-                        title: '编辑角色',
+                        title: '编辑管理员',
                         content: content,
                         area: ['60vw', '70vh'],
                         offset: ['15vh', '20vw'],
@@ -88,8 +88,8 @@
     }
     //删除角色
     function deleteRole(ids, obj) {
-        var msg = obj ? '确认删除角色【' + obj.data.roleName + '】吗？' : '确认删除选中数据吗？'
-        top.winui.window.confirm(msg, { icon: 3, title: '删除系统角色' }, function (index) {
+        var msg = obj ? '确认删除管理员【' + obj.data.roleName + '】吗？' : '确认删除选中数据吗？'
+        top.winui.window.confirm(msg, { icon: 3, title: '删除系统管理员' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令
             //刷新表格

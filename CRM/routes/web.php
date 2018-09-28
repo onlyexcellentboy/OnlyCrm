@@ -20,7 +20,16 @@ Route::get('/', function () {
 Route::get( 'role' , 'RoleController@roleList' );
 
 # 角色编辑
-Route::get( 'edit' , 'RoleController@roleEdit' );
+Route::get( 'roleEdit' , 'RoleController@roleEdit' );
 
 # 系统菜单
 Route::get( 'systemMenu' , 'SystemController@menuList' );
+
+# 系统菜单编辑
+Route::get( 'menuEdit' , 'SystemController@menuEdit' );
+
+# 管理员列表
+Route::get( 'admin' , 'AdminController@adminList' );
+
+# 管理员编辑
+Route::get( 'adminEdit' , 'AdminController@adminEdit' );
