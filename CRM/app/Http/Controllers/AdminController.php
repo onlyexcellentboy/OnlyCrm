@@ -33,16 +33,12 @@ class AdminController extends Controller
         # 转成数组格式
         $info = json_decode( json_encode( $info ) , true );
 
-        # 循环将二维数组转为一维数组
-        $admin_info = [];
-        foreach ( $info as $k => $v ){
-            $admin_info += $v;
-        }
 
+//        print_r( $info );
         # 拼接返回的json数据
-        $admin_info = json_encode( ['code' => 0 , 'msg' => '' , 'count' => $count , 'data' => [$admin_info] ] );
+        $admin_info = ['code' => 0 , 'msg' => '' , 'count' => $count , 'data' => $info ] ;
 
-        return $admin_info;
+        return json_encode( $admin_info );
     }
 
     # 管理员编辑
