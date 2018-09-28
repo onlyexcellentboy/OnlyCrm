@@ -45,7 +45,7 @@
             var index = layer.load(1);
             $.ajax({
                 type: 'get',
-                url: 'edit.html?id=' + data.id,
+                url: 'http://www.crm.com/edit?id=' + data.id,
                 async: true,
                 success: function (data) {
                     layer.close(index);

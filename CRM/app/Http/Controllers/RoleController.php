@@ -11,4 +11,9 @@ class RoleController extends Controller
         return view( 'role' );
     }
 
+
+    # 编辑角色
+    public function roleEdit(){
+        return view( 'roleEdit' );
+    }
 }

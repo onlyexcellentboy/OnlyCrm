@@ -11,8 +11,13 @@
 |
 */
 
+# 首页
 Route::get('/', function () {
     return view('index');
 });
 
+# 角色列表
 Route::get( 'role' , 'RoleController@roleList' );
+
+# 角色编辑
+Route::get( 'edit' , 'RoleController@roleEdit' );
