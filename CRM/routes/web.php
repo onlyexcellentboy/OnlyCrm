@@ -33,3 +33,6 @@ Route::get( 'admin' , 'AdminController@adminList' );
 
 # 管理员编辑
 Route::get( 'adminEdit' , 'AdminController@adminEdit' );
+
+# 订单列表
+Route::get( 'order' , 'OrderController@orderList' );

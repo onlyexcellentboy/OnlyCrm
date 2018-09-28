@@ -61,12 +61,22 @@
       "title": "管理员管理",
       "pageURL": "http://www.crm.com/admin",
       "name": "管理员管理",
-      "icon": "fa-th",
+      "icon": "fa-user",
       "openType": 2,
       "maxOpen": -1,
       "extend": false,
       "childs": null,
       "id": 77
+    },
+    {
+      "title": "订单管理",
+      "pageURL": "http://www.crm.com/order",
+      "name": "订单管理",
+      "icon": "fa-list-alt",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
     },
     {
       "title": "点赞",
