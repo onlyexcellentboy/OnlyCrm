@@ -66,3 +66,9 @@ Route::get( 'expense' , 'ExpenseController@expenseList' );
 
 # 费用编辑
 Route::get( 'expenseEdit' , 'ExpenseController@expenseEdit' );
+
+# 权限列表
+Route::get( 'power' , 'PowerController@powerList' );
+
+# 权限编辑
+Route::get( 'powerEdit' , 'PowerController@powerEdit' );

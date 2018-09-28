@@ -105,6 +105,16 @@
       "extend": false,
       "childs": null,
       "id": 58
+    },
+    {
+      "title": "权限管理",
+      "pageURL": "http://www.crm.com/power",
+      "name": "权限管理",
+      "icon": "fa-superpowers",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
     }
   ]
 }
