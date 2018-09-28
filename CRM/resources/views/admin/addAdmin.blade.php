@@ -51,6 +51,9 @@
         <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
     </div>
 </div>
+
+<script src="../../js/jquery-3.2.1.min.js"></script>
+
 <script>
     layui.use(['form','layer'], function (form) {
 //        以下为系统自带
@@ -89,6 +92,59 @@
 
 //      以上为系统自带
 
-        
+        // 提交数据
+        $('.layui-btn').click(function () {
+            // 获取管理员名称
+            var account = $('[name=admin_account]').val();
+
+            // 判断名称不为空
+            if( account === '' ){
+                winui.window.msg( '管理员名称不能为空' );
+                return false
+            }
+
+            // 获取密码
+            var psd = $('[name=admin_psd]').val();
+
+            // 判断密码不为空
+            if( psd === '' ){
+                winui.window.msg( '管理员名密码不能为空' );
+                return false;
+            }
+
+            // 获取确认密码
+            var confirm_psd = $('[name=confirm_psd]').val();
+
+            // 判断确认密码不为空
+            if( confirm_psd === '' ){
+                winui.window.msg( '确认密码不能为空' );
+                return false;
+            }
+
+            //判断密码和确认密码一致
+            if( psd != confirm_psd ){
+                winui.window.msg( '确认密码必须和密码一致' );
+                return false;
+            }
+
+            // 获取手机号
+            var tel = $('[name=admin_tel]').val();
+
+            // 判断手机号不为空
+            if( tel === '' ){
+                winui.window.msg( '手机号码不能为空' );
+                return false;
+            }
+
+
+            // 获取是否实名
+            var is_real = $('[name=is_real]:checked').val();
+
+
+            // 获取是否启用
+            var show = $('[name=show]:checked').val();
+
+            alert( show );
+        })
     });
 </script>
