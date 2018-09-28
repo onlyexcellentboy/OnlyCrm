@@ -109,7 +109,7 @@ layui.config({
         var index = layer.load(1);
         $.ajax({
             type: 'get',
-            url: 'edit.html?id=' + id,
+            url: 'http://www.crm.com/menuEdit?id=' + id,
             success: function (data) {
                 layer.close(index);
                 content = data;

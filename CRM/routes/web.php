@@ -20,7 +20,26 @@ Route::get('/', function () {
 Route::get( 'role' , 'RoleController@roleList' );
 
 # 角色编辑
+<<<<<<< HEAD
 Route::get( 'edit' , 'RoleController@roleEdit' );
 
 #登录页面
 Route::get( 'login_list' , 'LoginController@login_list' );
+=======
+Route::get( 'roleEdit' , 'RoleController@roleEdit' );
+
+# 系统菜单
+Route::get( 'systemMenu' , 'SystemController@menuList' );
+
+# 系统菜单编辑
+Route::get( 'menuEdit' , 'SystemController@menuEdit' );
+
+# 管理员列表
+Route::get( 'admin' , 'AdminController@adminList' );
+
+# 管理员编辑
+Route::get( 'adminEdit' , 'AdminController@adminEdit' );
+
+# 订单列表
+Route::get( 'order' , 'OrderController@orderList' );
+>>>>>>> 547709d966a1fd3d0880474aee5e32a9b4991b29

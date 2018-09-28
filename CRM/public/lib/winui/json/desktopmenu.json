@@ -14,30 +14,8 @@
       "id": 1
     },
     {
-      "title": "打赏作者",
-      "pageURL": "/home/reward",
-      "name": "打赏作者",
-      "icon": "fa-qrcode",
-      "openType": 1,
-      "maxOpen": -1,
-      "extend": false,
-      "childs": null,
-      "id": 3
-    },
-    {
-      "title": "基本说明",
-      "pageURL": "views/demo/introduce.html",
-      "name": "基本说明",
-      "icon": "fa-info-circle",
-      "openType": 2,
-      "maxOpen": -1,
-      "extend": false,
-      "childs": null,
-      "id": 4
-    },
-    {
       "title": "系统菜单",
-      "pageURL": "views/menu/list_iframe.html",
+      "pageURL": "http://www.crm.com/systemMenu",
       "name": "系统菜单",
       "icon": "fa-navicon",
       "openType": 2,
@@ -58,6 +36,27 @@
       "id": 22
     },
     {
+      "title": "管理员管理",
+      "pageURL": "http://www.crm.com/admin",
+      "name": "管理员管理",
+      "icon": "fa-user",
+      "openType": 2,
+      "maxOpen": -1,
+      "extend": false,
+      "childs": null,
+      "id": 77
+    },
+    {
+      "title": "订单管理",
+      "pageURL": "http://www.crm.com/order",
+      "name": "订单管理",
+      "icon": "fa-list-alt",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
+    },
+    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
@@ -66,16 +65,6 @@
       "extend": false,
       "childs": null,
       "id": 62
-    },
-    {
-      "title": "Layui框架",
-      "pageURL": "http://www.layui.com/",
-      "name": "Layui",
-      "icon": "http://www.layui.com/favicon.ico",
-      "openType": 2,
-      "extend": false,
-      "childs": null,
-      "id": 57
     },
     {
       "title": "ECharts",
