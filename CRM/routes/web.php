@@ -21,3 +21,6 @@ Route::get( 'role' , 'RoleController@roleList' );
 
 # 角色编辑
 Route::get( 'edit' , 'RoleController@roleEdit' );
+
+#登录页面
+Route::get( 'login_list' , 'LoginController@login_list' );
