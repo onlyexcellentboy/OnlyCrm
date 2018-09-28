@@ -68,9 +68,9 @@
     },
     {
       "title": "跟单管理",
-      "pageURL": "http://www.crm.com/pact",
+      "pageURL": "http://www.crm.com/records",
       "name": "跟单管理",
-      "icon": "fa-github-square",
+      "icon": "fa-cloud",
       "openType": 2,
       "extend": false,
       "childs": null,

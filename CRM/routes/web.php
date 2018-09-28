@@ -42,3 +42,6 @@ Route::get( 'order' , 'OrderController@orderList' );
 
 # 合同列表
 Route::get( 'pact' , 'PactController@pactList' );
+
+# 跟单列表
+Route::get( 'records' , 'RecordsController@recordsList' );

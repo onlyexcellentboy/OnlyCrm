@@ -16,7 +16,7 @@
         </div>
     </div>
     <div style="margin:auto 10px;">
-        <table id="pact" lay-filter="pacttable"></table>
+        <table id="records" lay-filter="recordstable"></table>
         <script type="text/html" id="barRole">
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
