@@ -108,9 +108,15 @@
 
             // 判断密码不为空
             if( psd === '' ){
-                winui.window.msg( '管理员名密码不能为空' );
+                winui.window.msg( '管理员密码不能为空' );
                 return false;
             }
+
+            // 判断密码长度  ---- 未完结
+//            if( strlen(psd) <= 6 ){
+//                winui.window.msg( '管理员密码不能少于6位' );
+//                return false;
+//            }
 
             // 获取确认密码
             var confirm_psd = $('[name=confirm_psd]').val();
@@ -144,7 +150,11 @@
             // 获取是否启用
             var show = $('[name=show]:checked').val();
 
-            alert( show );
+            $.ajax({
+                url:'insertAdminDo',
+            });
+
+
         })
     });
 </script>

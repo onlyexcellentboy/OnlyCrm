@@ -47,6 +47,11 @@ class AdminController extends Controller
         return view( 'admin/addAdmin' );
     }
 
+    # 执行新增管理员
+    public function insertAdminDo(){
+
+    }
+
     # 管理员编辑
     public function adminEdit(){
         return view( 'admin/adminEdit' );
