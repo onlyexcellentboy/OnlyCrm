@@ -34,6 +34,9 @@ Route::get( 'menuEdit' , 'SystemController@menuEdit' );
 # 管理员列表
 Route::get( 'admin' , 'AdminController@adminList' );
 
+# 管理员数据
+Route::get( 'admin_data' , 'AdminController@adminData' );
+
 # 管理员编辑
 Route::get( 'adminEdit' , 'AdminController@adminEdit' );
 

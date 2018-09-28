@@ -43,7 +43,20 @@
 
 <script type="text/javascript">
 
-    $('#addAdmin').click(function () {
-        alert(1);
-    });
+//    $('#addAdmin').click(function () {
+////        alert(1);
+//
+//        //从桌面打开
+//        top.winui.window.open({
+//            id: 'editAdmin',
+//            type: 1,
+//            title: '编辑管理员',
+//            content: content,
+//            area: ['60vw', '70vh'],
+//            offset: ['15vh', '20vw'],
+//        });
+//        top.winui.window.msg("选择框带联动的,尽情享用", {
+//            time: 2000
+//        });
+//    });
 </script>

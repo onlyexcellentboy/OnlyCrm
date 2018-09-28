@@ -12,7 +12,7 @@
     table.render({
         id: tableId,
         elem: '#admin',
-        url: '../../json/rolelist.json',
+        url: 'http://www.crm.com/admin_data',
         //height: 'full-65', //自适应高度
         //size: '',   //表格尺寸，可选值sm lg
         //skin: '',   //边框风格，可选值line row nob
@@ -21,10 +21,11 @@
         limits: [8, 16, 24, 32, 40, 48, 56],
         limit: 8,
         cols: [[
-            { field: 'id', type: 'checkbox' },
-            { field: 'roleName', title: '名称', width: 120 },
-            { field: 'description', title: '描述', width: 582 },
-            { field: 'dataState', title: '状态', width: 60, templet: '#stateTpl' },
+            { field: 'admin_id', type: 'checkbox' },
+            { field: 'admin_id', title: 'id', width: 120 },
+            { field: 'admin_account', title: '名称', width: 120 },
+            { field: 'admin_phone', title: '手机', width: 120 },
+            { field: 'last_login', title: '最后一次登录', width: 120, templet: '#stateTpl' },
             { title: '操作', fixed: 'right', align: 'center', toolbar: '#barRole', width: 120 }
         ]]
     });
@@ -35,17 +36,17 @@
         var tr = obj.tr; //获得当前行 tr 的DOM对象
         var ids = '';   //选中的Id
         $(data).each(function (index, item) {
-            ids += item.id + ',';
+            ids += item.admin_id + ',';
         });
         if (layEvent === 'del') { //删除
             deleteRole(ids, obj);
         } else if (layEvent === 'edit') { //编辑
-            if (!data.id) return;
+            if (!data.admin_id) return;
             var content;
             var index = layer.load(1);
             $.ajax({
                 type: 'get',
-                url: 'http://www.crm.com/adminEdit?id=' + data.id,
+                url: 'http://www.crm.com/adminEdit?id=' + data.admin_id,
                 async: true,
                 success: function (data) {
                     layer.close(index);
@@ -88,7 +89,7 @@
     }
     //删除角色
     function deleteRole(ids, obj) {
-        var msg = obj ? '确认删除管理员【' + obj.data.roleName + '】吗？' : '确认删除选中数据吗？'
+        var msg = obj ? '确认删除管理员【' + obj.data.admin_account + '】吗？' : '确认删除选中数据吗？'
         top.winui.window.confirm(msg, { icon: 3, title: '删除系统管理员' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令
@@ -108,7 +109,7 @@
         });
     }
     //绑定按钮事件
-    $('#addRole').on('click', addRole);
+    $('#addAdmin').on('click', addRole);
     $('#deleteRole').on('click', function () {
         var checkStatus = table.checkStatus(tableId);
         var checkCount = checkStatus.data.length;
