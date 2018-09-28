@@ -10,4 +10,9 @@ class RecordsController extends Controller
     public function recordsList(){
         return view( 'records/recordsList' );
     }
+
+    # 跟单编辑
+    public function recordsEdit(){
+        return view( 'records/recordsEdit' );
+    }
 }

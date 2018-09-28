@@ -45,3 +45,6 @@ Route::get( 'pact' , 'PactController@pactList' );
 
 # 跟单列表
 Route::get( 'records' , 'RecordsController@recordsList' );
+
+# 跟单编辑
+Route::get( 'recordsEdit' , 'RecordsController@recordsEdit' );
