@@ -41,6 +41,12 @@ class AdminController extends Controller
         return json_encode( $admin_info );
     }
 
+
+    # 新增管理员
+    public function insertAdmin(){
+        return view( 'admin/addAdmin' );
+    }
+
     # 管理员编辑
     public function adminEdit(){
         return view( 'admin/adminEdit' );

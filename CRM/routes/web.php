@@ -37,6 +37,9 @@ Route::get( 'admin' , 'AdminController@adminList' );
 # 管理员数据
 Route::get( 'admin_data' , 'AdminController@adminData' );
 
+# 新增管理员
+Route::get( 'insertAdmin' , 'AdminController@insertAdmin' );
+
 # 管理员编辑
 Route::get( 'adminEdit' , 'AdminController@adminEdit' );
 

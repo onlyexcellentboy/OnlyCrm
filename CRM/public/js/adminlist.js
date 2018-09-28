@@ -88,17 +88,17 @@
 
         $.ajax({
             type: 'get',
-            url: 'http://www.crm.com/adminEdit',
+            url: 'http://www.crm.com/insertAdmin',
             async: true,
             success: function (data) {
                 // layer.close(index);
-                // content = data;
+                content = data;
                 //从桌面打开
                 top.winui.window.open({
                     id: 'addAdmin',
                     type: 1,
                     title: '新增管理员',
-                    // content: content,
+                    content: content,
                     area: ['60vw', '70vh'],
                     offset: ['15vh', '20vw']
                 });
