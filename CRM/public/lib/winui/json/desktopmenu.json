@@ -105,26 +105,6 @@
       "extend": false,
       "childs": null,
       "id": 58
-    },
-    {
-      "title": "点赞",
-      "pageURL": "http://fly.layui.com/case/u/3547992",
-      "name": "点赞",
-      "icon": "fa-thumbs-up",
-      "openType": 2,
-      "extend": false,
-      "childs": null,
-      "id": 62
-    },
-    {
-      "title": "ECharts",
-      "pageURL": "views/echarts/demo.html",
-      "name": "ECharts",
-      "icon": "fa-bar-chart",
-      "openType": 2,
-      "extend": false,
-      "childs": null,
-      "id": 58
     }
   ]
 }
