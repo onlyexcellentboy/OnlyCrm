@@ -11,12 +11,12 @@
     <div class="winui-toolbar">
         <div class="winui-tool">
             <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-            <button id="addRole" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增订单</button>
+            <button id="addRole" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增合同</button>
             <button id="deleteRole" class="winui-toolbtn"><i class="fa fa-trash" aria-hidden="true"></i>删除选中</button>
         </div>
     </div>
     <div style="margin:auto 10px;">
-        <table id="role" lay-filter="roletable"></table>
+        <table id="pact" lay-filter="pacttable"></table>
         <script type="text/html" id="barRole">
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -35,7 +35,7 @@
     <script>
             layui.config({
                 base: '../../js/'
-            }).use('rolelist');
+            }).use('pactlist');
     </script>
 </body>
 </html>
