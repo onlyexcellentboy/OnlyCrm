@@ -32,6 +32,7 @@
         {{--</script>--}}
     </div>
     <script src="../../lib/layui/layui.js"></script>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
     <script>
             layui.config({
                 base: '../../js/'
@@ -39,3 +40,10 @@
     </script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+    $('#addAdmin').click(function () {
+        alert(1);
+    });
+</script>
