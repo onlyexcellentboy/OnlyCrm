@@ -48,3 +48,9 @@ Route::get( 'records' , 'RecordsController@recordsList' );
 
 # 跟单编辑
 Route::get( 'recordsEdit' , 'RecordsController@recordsEdit' );
+
+# 客户管理
+Route::get( 'user' , 'UserController@userList' );
+
+# 客户编辑
+Route::get( 'userEdit' , 'UserController@userEdit' );

@@ -77,6 +77,16 @@
       "id": 58
     },
     {
+      "title": "客户管理",
+      "pageURL": "http://www.crm.com/user",
+      "name": "客户管理",
+      "icon": "fa-users",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
+    },
+    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
