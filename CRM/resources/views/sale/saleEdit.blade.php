@@ -28,6 +28,9 @@
     }
 </style>
 <div style="width:860px;margin:0 auto;padding-top:20px;">
+    <ins class="adsbygoogle" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+
+    <div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
     <form class="layui-form layui-form-pane" action="">
         <input type="hidden" name="id" value="3" />
         <div class="layui-form-item">
@@ -275,6 +278,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 <script>
     var getMenuAndFunction;

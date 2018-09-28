@@ -8,6 +8,9 @@
     <link href="../../lib/winui/css/winui.css" rel="stylesheet" />
 </head>
 <body>
+<ins class="adsbygoogle" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+
+<div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
     <div class="winui-toolbar">
         <div class="winui-tool">
             <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
@@ -37,5 +40,6 @@
                 base: '../../js/'
             }).use('userlist');
     </script>
+</div>
 </body>
 </html>
