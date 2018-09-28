@@ -97,6 +97,16 @@
       "id": 58
     },
     {
+      "title": "费用管理",
+      "pageURL": "http://www.crm.com/expense",
+      "name": "费用管理",
+      "icon": "fa-money",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
+    },
+    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
