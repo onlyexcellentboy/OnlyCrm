@@ -54,3 +54,9 @@ Route::get( 'user' , 'UserController@userList' );
 
 # 客户编辑
 Route::get( 'userEdit' , 'UserController@userEdit' );
+
+# 售后管理
+Route::get( 'sale' , 'SaleController@saleList' );
+
+# 售后编辑
+Route::get( 'saleEdit' , 'SaleController@saleEdit' );

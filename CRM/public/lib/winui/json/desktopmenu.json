@@ -80,7 +80,17 @@
       "title": "客户管理",
       "pageURL": "http://www.crm.com/user",
       "name": "客户管理",
-      "icon": "fa-users",
+      "icon": "fa-grav",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 58
+    },
+    {
+      "title": "售后管理",
+      "pageURL": "http://www.crm.com/sale",
+      "name": "售后管理",
+      "icon": "fa-eercast",
       "openType": 2,
       "extend": false,
       "childs": null,
