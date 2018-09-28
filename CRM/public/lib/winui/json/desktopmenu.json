@@ -50,7 +50,7 @@
       "title": "订单管理",
       "pageURL": "http://www.crm.com/order",
       "name": "订单管理",
-      "icon": "fa-list-alt",
+      "icon": "fa-first-order",
       "openType": 2,
       "extend": false,
       "childs": null,
