@@ -40,6 +40,9 @@ Route::get( 'admin_data' , 'AdminController@adminData' );
 # 新增管理员
 Route::get( 'insertAdmin' , 'AdminController@insertAdmin' );
 
+# 执行新增管理员
+Route::post( 'insertAdminDo' , 'AdminController@insertAdminDo' );
+
 # 管理员编辑
 Route::get( 'adminEdit' , 'AdminController@adminEdit' );
 

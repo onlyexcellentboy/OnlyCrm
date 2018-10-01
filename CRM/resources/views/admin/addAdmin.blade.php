@@ -37,7 +37,7 @@
             <label class="layui-form-label">是否已实名</label>
             <div class="layui-input-block" style="margin-right: 65%;">
                 <input type="radio" name="is_real" value="1" title="是" checked="">
-                <input type="radio" name="is_real" value="0" title="否">
+                <input type="radio" name="is_real" value="2" title="否">
             </div>
         </div>
 
@@ -45,7 +45,7 @@
             <label class="layui-form-label">是否启用</label>
             <div class="layui-input-block" style="margin-right: 65%;">
                 <input type="radio" name="show" value="1" title="是" checked="">
-                <input type="radio" name="show" value="0" title="否">
+                <input type="radio" name="show" value="2" title="否">
             </div>
         </div>
         <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
@@ -152,7 +152,7 @@
 
             $.ajax({
                 url:'insertAdminDo',
-                data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&_token='+'{{csrf_token()}}',
+                data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&show='+show+'&_token='+'{{csrf_token()}}',
                 type:'post',
                 dataType:'json',
                 async:false,
