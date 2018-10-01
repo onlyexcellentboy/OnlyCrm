@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminController extends Controller
+class AdminController extends CommonController
 {
     # 管理员列表
     public function adminList(){
@@ -36,7 +36,7 @@ class AdminController extends Controller
 
 //        print_r( $info );
         # 拼接返回的json数据
-        $admin_info = ['code' => 0 , 'msg' => '' , 'count' => $count , 'data' => $info ] ;
+        $admin_info = $this -> show( $count , $info ) ;
 
         return json_encode( $admin_info );
     }
