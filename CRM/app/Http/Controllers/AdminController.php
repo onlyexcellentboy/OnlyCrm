@@ -48,8 +48,13 @@ class AdminController extends CommonController
     }
 
     # 执行新增管理员
-    public function insertAdminDo(){
+    public function insertAdminDo( Request $request ){
+        # 接收数据
 
+        # 账号
+        $account = $request -> input( 'account' );
+
+        echo $account;
     }
 
     # 管理员编辑

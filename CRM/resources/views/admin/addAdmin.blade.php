@@ -152,6 +152,13 @@
 
             $.ajax({
                 url:'insertAdminDo',
+                data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&_token='+'{{csrf_token()}}',
+                type:'post',
+                dataType:'json',
+                async:false,
+                success:function ( json_info ) {
+
+                }
             });
 
 
