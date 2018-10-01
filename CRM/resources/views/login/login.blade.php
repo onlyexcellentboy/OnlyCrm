@@ -22,7 +22,11 @@
     });
 </script>
 <!--SIGN UP-->
-<h1>klasikal Login Form</h1>
+<h1>CRM客户管理系统
+<br/>账号 zhangsan
+    <br>
+    密码：123123
+</h1>
 <div class="login-form">
     <div class="close"> </div>
     <div class="head-info">
@@ -35,13 +39,13 @@
         <img src="Login/images/avtar.png" />
     </div>
     <form>
-        <input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+        <input type="text" class="text" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
         <div class="key">
-            <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+            <input type="password" value="" name="psd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
         </div>
     </form>
     <div class="signin">
-        <input type="submit" value="Login" >
+        <input type="submit" value="Login" name="submit"/>
     </div>
 </div>
 <div class="copy-rights">
@@ -50,3 +54,56 @@
 
 </body>
 </html>
+
+<script src="../../js/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript">
+
+//    layui.use(['form','layer'], function (form) {
+//        var $ = layui.$
+//            , msg = winui.window.msg;
+
+        // 登录
+        $('[name=submit]').click(function () {
+
+            //获取用户名
+            var account = $('.text').val();
+
+            // 判断用户名不为空
+            if (account == '') {
+//                winui.window.msg('请填写用户名');
+                alert( '请填写用户名' );
+                return false;
+            }
+
+            // 获取密码
+            var psd = $('[name=psd]').val();
+
+            // 判断密码不为空
+            if( psd == '' ){
+                alert( '请输入密码' );
+                return false;
+            }
+
+            //发送ajax请求
+            $.ajax({
+               url:'checkLogin',
+                type:'post',
+                data:'account='+account+'&psd='+psd+'&_token='+'{{csrf_token()}}',
+                dataType:'json',
+                async:false,
+                success:function ( json_info ) {
+                    if( json_info.status == 1000 ){
+                        window.location.href = 'index';
+                    }else{
+                        alert( json_info.msg );
+                    }
+
+                }
+            });
+//
+        });
+
+
+//    });
+</script>

@@ -12,7 +12,7 @@
 */
 
 # 首页
-Route::get('/', function () {
+Route::get('index', function () {
     return view('index');
 });
 
@@ -23,7 +23,10 @@ Route::get( 'role' , 'RoleController@roleList' );
 Route::get( 'edit' , 'RoleController@roleEdit' );
 
 #登录页面
-Route::get( 'login_list' , 'LoginController@login_list' );
+Route::get( '/' , 'LoginController@login_list' );
+
+# 登录
+Route::post( 'checkLogin' , 'LoginController@checkLogin' );
 
 # 系统菜单
 Route::get( 'systemMenu' , 'SystemController@menuList' );
