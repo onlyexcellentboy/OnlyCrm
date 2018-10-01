@@ -157,6 +157,11 @@
                 dataType:'json',
                 async:false,
                 success:function ( json_info ) {
+                    if( json_info.status == 1000 ){
+                        winui.window.msg( '添加成功了，可以登录了' );
+                    }else{
+                        winui.window.msg( json_info.msg );
+                    }
 
                 }
             });

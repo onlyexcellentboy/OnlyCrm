@@ -124,19 +124,33 @@
         top.winui.window.confirm(msg, { icon: 3, title: '删除系统管理员' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令
-            //刷新表格
-            if (obj) {
-                top.winui.window.msg('删除成功', {
-                    icon: 1,
-                    time: 2000
-                });
-                obj.del(); //删除对应行（tr）的DOM结构
-            } else {
-                top.winui.window.msg('向服务端发送删除指令后刷新表格即可', {
-                    time: 2000
-                });
-                reloadTable();  //直接刷新表格
-            }
+            $.ajax({
+               url:'http://www.crm.com/adminDel?id='+obj.data.admin_id,
+                type:'get',
+                dataType:'json',
+                async:false,
+                success:function ( json_info ) {
+                    if( json_info.status == 1000 ){
+                        top.winui.window.msg('删除成功', {
+                            icon: 1,
+                            time: 2000
+                        });
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        reloadTable();  //直接刷新表格
+                    }else{
+                        winui.window.msg( json_info.msg );
+                    }
+                }
+            });
+            //刷新表格 ---- 系统自带
+            // if (obj) {
+            //
+            // } else {
+            //     top.winui.window.msg('向服务端发送删除指令后刷新表格即可', {
+            //         time: 2000
+            //     });
+            //
+            // }
         });
     }
     //绑定按钮事件

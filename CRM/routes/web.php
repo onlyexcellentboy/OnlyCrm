@@ -46,6 +46,9 @@ Route::post( 'insertAdminDo' , 'AdminController@insertAdminDo' );
 # 管理员编辑
 Route::get( 'adminEdit' , 'AdminController@adminEdit' );
 
+# 删除管理员
+Route::get( 'adminDel' , 'AdminController@adminDel' );
+
 # 订单列表
 Route::get( 'order' , 'OrderController@orderList' );
 

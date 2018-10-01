@@ -154,7 +154,7 @@ class AdminController extends CommonController
 
         # 执行添加数据库
         if( DB::table( 'crm_admin') -> insert( $info ) ){
-            return $this -> success( '添加成功，可以登录了' );
+            return $this -> success();
         }else{
             return $this -> fail( '添加失败，请重试' );
         }
@@ -162,7 +162,53 @@ class AdminController extends CommonController
     }
 
     # 管理员编辑
-    public function adminEdit(){
+    public function adminEdit( Request $request ){
+        # 接受要编辑的管理员id
+        $id = $request -> input( 'id' );
+
+        # 查询条件
+        $where = [
+            'admin_id' => $id
+        ];
+
+        # 根据接到的id查询一条数据
+//        $info = DB::table( 'crm_admin' )
+//            -> where( $where )
+//            -> select( 'admin_account' , '')
         return view( 'admin/adminEdit' );
     }
+
+    # 管理员删除（修改状态）
+    public function adminDel( Request $request ){
+        # 接收要删除的管理员id
+        $id = $request -> input( 'id' );
+
+//        echo $id;
+        # 判断id不为空
+        if( !$id ){
+            return $this -> fail( '请选择要删除的管理员' );
+        }
+
+        # 根据接收到的id进行修改状态
+        $where = [
+            'admin_id' => $id
+        ];
+
+        $data = [
+            'admin_status' => 2
+        ];
+
+        # 执行修改状态
+        $res = DB::table( 'crm_admin' )
+            -> where( $where )
+            -> update( $data );
+
+        if( $res ){
+            return $this -> success( '删除成功' );
+        }else{
+            return $this -> fail( '请求失败，请重试' );
+        }
+
+    }
+
 }
