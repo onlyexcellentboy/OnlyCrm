@@ -45,7 +45,7 @@
         </div>
     </form>
     <div class="signin">
-        <input type="submit" value="Login" name="submit"/>
+        <input type="submit" value="登录" name="submit"/>
     </div>
 </div>
 <div class="copy-rights">

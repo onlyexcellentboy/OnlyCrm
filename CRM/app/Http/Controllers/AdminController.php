@@ -138,7 +138,7 @@ class AdminController extends CommonController
             return $this -> fail( '该用户名或手机号已被注册，换一个试试吧' );
         }
 
-        # 生成管理员加密密码 md5（生成规则：密码 + 用户名 + 当前时间 ）
+        # 生成管理员加密密码 md5（生成规则：密码 + 用户名 ）
         $password = md5( $confirm_psd.$account.time() );
 
 //        echo $password;exit;
