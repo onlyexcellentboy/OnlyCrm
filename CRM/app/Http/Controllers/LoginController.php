@@ -60,7 +60,7 @@ class LoginController extends Controller
         if( $password != $info['admin_pas'] ){
             return json_encode( ['status' => 100, 'msg' => '用户名或密码有误'] );
         }else{
-            Cookie::queue( 'user' , $info );
+//            Cookie::queue( 'user' , $info , 180 );
             return json_encode( ['status' => 1000, 'msg' => '登录成功'] );
         }
 

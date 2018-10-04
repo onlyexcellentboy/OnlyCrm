@@ -12,7 +12,7 @@
     table.render({
         id: tableId,
         elem: '#user',
-        url: '../../json/rolelist.json',
+        url: 'http://www.crm.com/userInfo',
         //height: 'full-65', //自适应高度
         //size: '',   //表格尺寸，可选值sm lg
         //skin: '',   //边框风格，可选值line row nob
@@ -21,10 +21,19 @@
         limits: [8, 16, 24, 32, 40, 48, 56],
         limit: 8,
         cols: [[
-            { field: 'id', type: 'checkbox' },
-            { field: 'roleName', title: '名称', width: 120 },
-            { field: 'description', title: '描述', width: 582 },
-            { field: 'dataState', title: '状态', width: 60, templet: '#stateTpl' },
+            { field: 'user_id', type: 'checkbox' },
+            { field: 'user_id', title: '项目信息', width: 90 },
+            { field: 'ctime', title: '录入时间', width: 110 },
+            { field: 'user_name', title: '客户名称', width: 90, templet: '#stateTpl' },
+            { field: 'province', title: '省份', width: 80, templet: '#stateTpl' },
+            { field: 'city', title: '地区', width: 80, templet: '#stateTpl' },
+            { field: 'area_detail', title: '详细地址', width: 150, templet: '#stateTpl' },
+            { field: 'user_type', title: '客户类型', width: 90, templet: '#stateTpl' },
+            { field: 'user_phone', title: '联系电话', width: 120, templet: '#stateTpl' },
+            { field: 'user_from', title: '客户来源', width: 90, templet: '#stateTpl' },
+            { field: 'admin_name', title: '联系人', width: 80, templet: '#stateTpl' },
+            { field: 'place', title: '职位', width: 80, templet: '#stateTpl' },
+            { field: 'admin_phone', title: '手机号码', width: 120, templet: '#stateTpl' },
             { title: '操作', fixed: 'right', align: 'center', toolbar: '#barRole', width: 120 }
         ]]
     });
