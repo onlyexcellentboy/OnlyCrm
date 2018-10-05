@@ -14,7 +14,7 @@
     <div class="winui-toolbar">
         <div class="winui-tool">
             <button id="reloadTable" class="winui-toolbtn"><i class="fa fa-refresh" aria-hidden="true"></i>刷新数据</button>
-            <button id="addRole" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增客户</button>
+            <button id="addUser" class="winui-toolbtn"><i class="fa fa-plus" aria-hidden="true"></i>新增客户</button>
             <button id="deleteRole" class="winui-toolbtn"><i class="fa fa-trash" aria-hidden="true"></i>删除选中</button>
         </div>
     </div>

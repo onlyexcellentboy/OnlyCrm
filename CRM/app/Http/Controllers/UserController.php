@@ -90,4 +90,8 @@ class UserController extends CommonController
     }
 
 
+    # 新增客户
+    public function insertUser(){
+        return view( 'user.insertUser' );
+    }
 }

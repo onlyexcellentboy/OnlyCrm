@@ -76,6 +76,9 @@ Route::get( 'userEdit' , 'UserController@userEdit' );
 # 删除客户
 Route::get( 'userDel' , 'UserController@userDel' );
 
+# 新增客户
+Route::get( 'insertUser' , 'UserController@insertUser' );
+
 # 售后管理
 Route::get( 'sale' , 'SaleController@saleList' );
 
