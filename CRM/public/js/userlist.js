@@ -44,17 +44,17 @@
         var tr = obj.tr; //获得当前行 tr 的DOM对象
         var ids = '';   //选中的Id
         $(data).each(function (index, item) {
-            ids += item.id + ',';
+            ids += item.user_id + ',';
         });
         if (layEvent === 'del') { //删除
             deleteRole(ids, obj);
         } else if (layEvent === 'edit') { //编辑
-            if (!data.id) return;
+            if (!data.user_id) return;
             var content;
             var index = layer.load(1);
             $.ajax({
                 type: 'get',
-                url: 'http://www.crm.com/userEdit?id=' + data.id,
+                url: 'http://www.crm.com/userEdit?id=' + data.user_id,
                 async: true,
                 success: function (data) {
                     layer.close(index);
@@ -97,23 +97,41 @@
     }
     //删除角色
     function deleteRole(ids, obj) {
-        var msg = obj ? '确认删除客户【' + obj.data.roleName + '】吗？' : '确认删除选中数据吗？'
+        var msg = obj ? '确认删除客户【' + obj.data.user_name + '】吗？' : '确认删除选中数据吗？'
         top.winui.window.confirm(msg, { icon: 3, title: '删除系统客户' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令
+            $.ajax({
+                url:'http://www.crm.com/userDel?id='+obj.data.user_id,
+                type:'get',
+                dataType:'json',
+                async:false,
+                success:function ( json_info ) {
+                    if( json_info.status == 1000 ){
+                        top.winui.window.msg('删除成功', {
+                            icon: 1,
+                            time: 2000
+                        });
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        reloadTable();  //直接刷新表格
+                    }else{
+                        winui.window.msg( json_info.msg );
+                    }
+                }
+            });
             //刷新表格
-            if (obj) {
-                top.winui.window.msg('删除成功', {
-                    icon: 1,
-                    time: 2000
-                });
-                obj.del(); //删除对应行（tr）的DOM结构
-            } else {
-                top.winui.window.msg('向服务端发送删除指令后刷新表格即可', {
-                    time: 2000
-                });
-                reloadTable();  //直接刷新表格
-            }
+            // if (obj) {
+            //     top.winui.window.msg('删除成功', {
+            //         icon: 1,
+            //         time: 2000
+            //     });
+            //     obj.del(); //删除对应行（tr）的DOM结构
+            // } else {
+            //     top.winui.window.msg('向服务端发送删除指令后刷新表格即可', {
+            //         time: 2000
+            //     });
+            //     reloadTable();  //直接刷新表格
+            // }
         });
     }
     //绑定按钮事件

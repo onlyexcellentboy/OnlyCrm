@@ -20,4 +20,9 @@ class CommonController extends Controller
     public function show( $count , $info ){
         return  ['code' => 0 , 'msg' => '' , 'count' => $count , 'data' => $info ];
     }
+
+    # 封装转数组格式方法
+    public function jsonToArray( $data = '' ){
+        return json_decode( json_encode( $data ) , true );
+    }
 }

@@ -73,6 +73,9 @@ Route::get( 'userInfo' , 'UserController@userInfo' );
 # 客户编辑
 Route::get( 'userEdit' , 'UserController@userEdit' );
 
+# 删除客户
+Route::get( 'userDel' , 'UserController@userDel' );
+
 # 售后管理
 Route::get( 'sale' , 'SaleController@saleList' );
 

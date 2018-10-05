@@ -41,4 +41,53 @@ class UserController extends CommonController
     public function userEdit(){
         return view( 'user/userEdit' );
     }
+
+    # 删除客户（修改状态）
+    public function userDel( Request $request ){
+        # 接收要删除的客户id
+        $id = $request -> input( 'id' );
+
+//        echo $id;
+
+        # 判断id是否存在
+        if( !$id ){
+            return $this -> fail( '请选择要删除的客户' );
+        }
+
+        # 查询条件
+        $where = [
+            'user_id' => $id
+        ];
+
+        # 根据id查询状态是否是正常
+        $info = DB::table( 'crm_user' )
+            -> where( $where )
+            -> select( 'status' )
+            -> first();
+
+        # 转成数组格式
+        $info = $this -> jsonToArray( $info );
+
+//        print_r( $info['status'] );
+
+        # 判断状态是否正常
+        if( $info['status'] != 1 ){
+            return $this -> fail( '该客户不存在或已删除' );
+        }else{
+            $data = [
+                'status' => 2
+            ];
+
+            # 修改状态
+            if( DB::table( 'crm_user') -> where( $where ) -> update( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '操作失败，请重试' );
+            }
+
+        }
+
+    }
+
+
 }
