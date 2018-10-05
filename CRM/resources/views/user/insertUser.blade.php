@@ -6,9 +6,9 @@
     </fieldset>
     <div class="layui-form layui-form-pane">
         <div class="layui-form-item" style="">
-            <label class="layui-form-label">管理员名称</label>
+            <label class="layui-form-label">客户名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_account" lay-verify="required" placeholder="请输入管理员名称" autocomplete="off" class="layui-input">
+                <input type="text" name="admin_account" lay-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
             </div>
         </div>
 
