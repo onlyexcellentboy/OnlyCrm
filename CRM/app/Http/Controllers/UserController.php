@@ -99,4 +99,61 @@ class UserController extends CommonController
     public function insertPosition(){
         return view( 'user.insertPosition' );
     }
+
+
+    # 执行新增职位
+    public function insertPositionDo( Request $request ){
+        # 接收职位
+        $position = $request -> input( 'position' );
+
+//        echo $position;
+
+        # 验证职位
+        if( !$position ){
+            return $this -> fail( '请输入职位' );
+        }
+
+        if( is_numeric( $position ) ){
+            return $this -> fail( '输入的格式不正确，请重新输入' );
+        }
+
+        # 查询条件
+        $where = [
+            'select_name' => $position,
+            'select_type' => 4
+        ];
+
+
+        # 验证该职位是否已存在
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select( 'select_id' )
+            -> first();
+
+        # 转为数组格式
+        $info = $this -> jsonToArray( $info );
+
+//        print_r( $info );exit;
+
+        if( empty($info ) ){
+            # 添加职位到数据库
+            $data = [
+                'select_name' => $position,
+                'select_type' => 4,
+                'status' => 1,
+                'ctime' => time(),
+                'utime' => time()
+            ];
+
+            # 执行添加
+            if( DB::table( 'crm_select') -> insertGetId( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '操作失败，请重试' );
+            }
+        }else{
+            return $this -> fail( '该职位已存在，请勿重复操作' );
+        }
+
+    }
 }

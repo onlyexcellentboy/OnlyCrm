@@ -13,7 +13,7 @@ class CommonController extends Controller
 
     # 封装失败提示
     public function fail( $msg = '' ){
-        return json_encode( ['status' => 1000 , 'msg' => $msg ] );
+        return json_encode( ['status' => 100 , 'msg' => $msg ] );
     }
 
     # 封装展示的数据

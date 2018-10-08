@@ -82,6 +82,11 @@ Route::get( 'insertUser' , 'UserController@insertUser' );
 # 新增职位
 Route::get( 'insertPosition' , 'UserController@insertPosition' );
 
+
+# 执行新增职位
+Route::post( 'insertPositionDo' , 'UserController@insertPositionDo' );
+
+
 # 售后管理
 Route::get( 'sale' , 'SaleController@saleList' );
 
