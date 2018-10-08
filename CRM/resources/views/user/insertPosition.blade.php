@@ -2,77 +2,17 @@
 
 <div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>新增客户</legend>
+        <legend>新增职位</legend>
     </fieldset>
+
     <div class="layui-form layui-form-pane">
         <div class="layui-form-item" style="">
-            <label class="layui-form-label">客户名称</label>
+            <label class="layui-form-label">新增职位</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_account" lay-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                <input type="text" name="admin_account" lay-verify="required" placeholder="请输入职位名称" autocomplete="off" class="layui-input">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">详细地址</label>
-            <div class="layui-input-inline">
-                <select name="quiz1">
-                    <option value="">请选择省</option>
-                    <option value="浙江" selected="">浙江省</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="quiz2">
-                    <option value="">请选择市</option>
-                    <option value="杭州">杭州</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="quiz3">
-                    <option value="">请选择县/区</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="layui-form-item" style="">
-            <label class="layui-form-label">联系人</label>
-            <div class="layui-input-inline">
-                <input type="text" name="admin_psd" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item" style="">
-            <label class="layui-form-label">职位</label>
-            <div class="layui-input-inline">
-                <select name="quiz4">
-                    <option value="">请选择</option>
-                </select>
-            </div>
-
-            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
-        </div>
-
-        <div class="layui-form-item" style="">
-            <label class="layui-form-label">手机号</label>
-            <div class="layui-input-inline">
-                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-form-item" style="">
-            <label class="layui-form-label">是否已实名</label>
-            <div class="layui-input-block" style="margin-right: 65%;">
-                <input type="radio" name="is_real" value="1" title="是" checked="">
-                <input type="radio" name="is_real" value="2" title="否">
-            </div>
-        </div>
-
-        <div class="layui-form-item" style="">
-            <label class="layui-form-label">是否启用</label>
-            <div class="layui-input-block" style="margin-right: 65%;">
-                <input type="radio" name="show" value="1" title="是" checked="">
-                <input type="radio" name="show" value="2" title="否">
-            </div>
-        </div>
         <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
     </div>
 </div>
@@ -134,8 +74,8 @@
                         type: 1,
                         title: '新增职位',
                         content: content,
-                        area: ['30vw', '25vh'],   //  vw设置宽  vh设置高
-                        offset: ['40vh', '35vw']  //  vh设置上下间距  vw设置左右间距
+                        area: ['60vw', '70vh'],
+                        offset: ['15vh', '20vw']
                     });
 
                     // top.winui.window.msg("选择框带联动的,尽情享用", {

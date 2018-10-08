@@ -79,6 +79,9 @@ Route::get( 'userDel' , 'UserController@userDel' );
 # 新增客户
 Route::get( 'insertUser' , 'UserController@insertUser' );
 
+# 新增职位
+Route::get( 'insertPosition' , 'UserController@insertPosition' );
+
 # 售后管理
 Route::get( 'sale' , 'SaleController@saleList' );
 

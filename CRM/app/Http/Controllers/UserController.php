@@ -94,4 +94,9 @@ class UserController extends CommonController
     public function insertUser(){
         return view( 'user.insertUser' );
     }
+
+    # 新增职位
+    public function insertPosition(){
+        return view( 'user.insertPosition' );
+    }
 }
