@@ -55,25 +55,82 @@
         </div>
 
         <div class="layui-form-item" style="">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-inline">
+                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input" placeholder="联系人联系电话"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input" placeholder="客户手机号"/>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品分类</label>
+            <div class="layui-input-inline">
+                <select name="quiz1">
+                    <option value="">请选择</option>
+                    <option value="浙江" selected="">浙江省</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="quiz2">
+                    <option value="">请选择</option>
+                    <option value="杭州">杭州</option>
+                </select>
             </div>
         </div>
 
         <div class="layui-form-item" style="">
-            <label class="layui-form-label">是否已实名</label>
-            <div class="layui-input-block" style="margin-right: 65%;">
-                <input type="radio" name="is_real" value="1" title="是" checked="">
-                <input type="radio" name="is_real" value="2" title="否">
+            <label class="layui-form-label">客户类型</label>
+            <div class="layui-input-inline">
+                <select name="quiz4">
+                    <option value="">请选择</option>
+                    @foreach( $position as $k => $v )
+                        <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
+                    @endforeach
+                </select>
             </div>
+
+            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
         </div>
 
         <div class="layui-form-item" style="">
-            <label class="layui-form-label">是否启用</label>
-            <div class="layui-input-block" style="margin-right: 65%;">
-                <input type="radio" name="show" value="1" title="是" checked="">
-                <input type="radio" name="show" value="2" title="否">
+            <label class="layui-form-label">客户来源</label>
+            <div class="layui-input-inline">
+                <select name="quiz4">
+                    <option value="">请选择</option>
+                    @foreach( $position as $k => $v )
+                        <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
+        </div>
+
+        <div class="layui-form-item" style="">
+            <label class="layui-form-label">客户级别</label>
+            <div class="layui-input-inline">
+                <select name="quiz4">
+                    <option value="">请选择</option>
+                    @foreach( $position as $k => $v )
+                        <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注其他</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
         </div>
         <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
