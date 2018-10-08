@@ -42,7 +42,7 @@
                         if (json.isSucceed) {
                             msg('添加成功');
                         } else {
-                            msg(json.message)
+                            msg(json.msg)
                         }
                         winui.window.close('addMenu');
                     },

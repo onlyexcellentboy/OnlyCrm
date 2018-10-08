@@ -92,7 +92,36 @@ class UserController extends CommonController
 
     # 新增客户
     public function insertUser(){
-        return view( 'user.insertUser' );
+        # 查询条件
+        $where = [
+            'status' => 1
+        ];
+
+        # 执行查询下拉框数据
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select(  'select_id' ,'select_name' , 'select_type' )
+            -> get();
+
+        # 转成数组格式
+        $info = $this -> jsonToArray( $info );
+
+
+        # 循环将类型变为数组的键
+        $position_info = [];
+        foreach ( $info as $k => $v ){
+            if( $v['select_type'] == 4 ){
+                $position_info[] = $v;
+            }
+
+        }
+
+
+
+//        print_r( $position_info );exit;
+
+
+        return view( 'user.insertUser' , ['position' => $position_info] );
     }
 
     # 新增职位
@@ -136,6 +165,7 @@ class UserController extends CommonController
 //        print_r( $info );exit;
 
         if( empty($info ) ){
+
             # 添加职位到数据库
             $data = [
                 'select_name' => $position,

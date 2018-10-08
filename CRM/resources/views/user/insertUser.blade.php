@@ -45,6 +45,9 @@
             <div class="layui-input-inline">
                 <select name="quiz4">
                     <option value="">请选择</option>
+                    @foreach( $position as $k => $v )
+                    <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
+                    @endforeach
                 </select>
             </div>
 
