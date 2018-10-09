@@ -15,23 +15,25 @@
         <div class="layui-form-item">
             <label class="layui-form-label">详细地址</label>
             <div class="layui-input-inline">
-                <select name="quiz1">
+                <select lay-filter="selected">
                     <option value="">请选择省</option>
-                    <option value="浙江" selected="">浙江省</option>
+                    @foreach( $area as $k => $v )
+                    <option value="{{$v['id']}}">{{$v['area_name']}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="quiz2">
+                <select lay-filter="city" name="city">
                     <option value="">请选择市</option>
-                    <option value="杭州">杭州</option>
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="quiz3">
+                <select name="area">
                     <option value="">请选择县/区</option>
                 </select>
             </div>
         </div>
+
 
         <div class="layui-form-item" style="">
             <label class="layui-form-label">联系人</label>
@@ -133,14 +135,16 @@
                 <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
             </div>
         </div>
+
         <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
     </div>
 </div>
 
 <script src="../../js/jquery-3.2.1.min.js"></script>
 
-<script>
+<script type="text/javascript">
     layui.use(['form','layer'], function (form) {
+
 //        以下为系统自带
         var $ = layui.$
             , msg = winui.window.msg;
@@ -176,6 +180,81 @@
         });
 
 //      以上为系统自带
+
+        // 三级联动   ----  市
+        form.on('select(selected)', function (data) {
+//            console.log(data);
+            // 选择的id
+            var id = data.value;
+
+            // 发送ajax请求将id传给php
+            $.ajax({
+                url: 'http://www.crm.com/areaUser',
+                data: 'id=' + id + '&_token=' + '{{csrf_token()}}',
+                type: 'get',
+                dataType: 'json',
+                success: function (json_info) {
+//                    console.log( json_info.data.type );
+
+                    var option = '<option value="0">请选择市</option>';
+
+                    $.each(json_info.data, function (k, v) {
+//                        console.log( v );
+
+                        option += '<option value="' + v.id + '">' + v.area_name + '</option>';
+                    });
+
+                    // 替换数据
+                    $('[name=city]').html( option );
+//console.log( option );
+                    // 渲染区选项
+                    $('[name=area]').html( '<option value="0">请选择县/区</option>' );
+
+                    // 重载下拉框
+                    form.render( 'select' );
+
+                }
+            });
+
+
+        });
+
+
+        // 三级联动   ----  区
+        form.on('select(city)', function (data) {
+//            console.log(data);
+            // 选择的id
+            var id = data.value;
+
+            // 发送ajax请求将id传给php
+            $.ajax({
+                url: 'http://www.crm.com/areaUser',
+                data: 'id=' + id + '&_token=' + '{{csrf_token()}}',
+                type: 'get',
+                dataType: 'json',
+                success: function (json_info) {
+//                    console.log( json_info.data.type );
+
+                    var option = '<option value="0">请选择县/区</option>';
+
+                    $.each(json_info.data, function (k, v) {
+//                        console.log( v );
+
+                        option += '<option value="' + v.id + '">' + v.area_name + '</option>';
+                    });
+
+                        // 替换数据
+                        $('[name=area]').html( option );
+
+                        // 重载下拉框
+                        form.render( 'select' );
+                    }
+
+
+            });
+
+
+        });
 
         //新增职位
         $('[name=insert]').click(function () {
@@ -291,6 +370,10 @@
             });
 
 
-        })
+        });
     });
+
+
+
+
 </script>

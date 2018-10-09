@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <button class="layui-btn" lay-submit="" lay-filter="demo1" name="play">立即提交</button>
+        <button class="layui-btn" lay-submit="" lay-filter="demo1" name="submit">立即提交</button>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
                         } else {
                             msg(json.msg)
                         }
-                        winui.window.close('addMenu');
+
                     },
                     error: function (xml) {
                         msg('添加失败');
@@ -59,7 +59,7 @@
 
 
         // 提交数据
-        $('[name=play]').click(function () {
+        $('[name=submit]').click(function () {
             // 获取管理员名称
             var position = $('[name=position]').val();
 
@@ -79,7 +79,11 @@
                 async:false,
                 success:function ( json_info ) {
                     if( json_info.status == 1000 ){
-                        winui.window.msg( '添加成功' );
+                        msg('添加成功', {
+                            icon: 1,
+                            time: 2000
+                        });
+                        winui.window.close('addPosition');
                     }else{
                         winui.window.msg( json_info.msg );
                     }

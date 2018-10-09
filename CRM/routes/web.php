@@ -87,6 +87,10 @@ Route::get( 'insertPosition' , 'UserController@insertPosition' );
 Route::post( 'insertPositionDo' , 'UserController@insertPositionDo' );
 
 
+# 查询地址
+Route::get( 'areaUser' , 'UserController@areaUser' );
+
+
 # 售后管理
 Route::get( 'sale' , 'SaleController@saleList' );
 

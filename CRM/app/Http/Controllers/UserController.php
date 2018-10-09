@@ -92,6 +92,7 @@ class UserController extends CommonController
 
     # 新增客户
     public function insertUser(){
+
         # 查询条件
         $where = [
             'status' => 1
@@ -116,13 +117,61 @@ class UserController extends CommonController
 
         }
 
-
-
 //        print_r( $position_info );exit;
 
+        # 查询条件
+            $area_where = [
+                'area_parent_id' => 0
+            ];
 
-        return view( 'user.insertUser' , ['position' => $position_info] );
+        # 查询省数据
+        $area = DB::table( 'crm_area' )
+            -> where( $area_where )
+            -> select( 'id' , 'area_name' , 'area_parent_id' )
+            -> get();
+
+        # 转成数组格式
+        $area = $this -> jsonToArray( $area );
+
+//        print_r( $area );exit;
+//        if( !empty( $area ) ){
+//           $this -> success( '' , $area );
+//        }
+
+
+        return view( 'user.insertUser' , ['position' => $position_info , 'area' => $area ] );
     }
+
+
+    # 地址数据
+    public function areaUser( Request $request ){
+        # 接收省市区父级id
+        $id = $request -> input( 'id' );
+
+//        echo $id;exit;
+
+        # 查询条件
+        $area_where = [
+            'area_parent_id' => $id
+        ];
+
+        # 查询省数据
+        $area = DB::table( 'crm_area' )
+            -> where( $area_where )
+            -> select( 'id' , 'area_name' , 'area_parent_id' )
+            -> get();
+
+        # 转成数组格式
+        $area = $this -> jsonToArray( $area );
+
+
+//        print_r( $area );exit;
+        if( !empty( $area ) ){
+            return $this -> success( '' , $area );
+        }
+
+    }
+
 
     # 新增职位
     public function insertPosition(){
