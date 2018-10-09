@@ -79,13 +79,9 @@
             <div class="layui-input-inline">
                 <select name="quiz1">
                     <option value="">请选择</option>
-                    <option value="浙江" selected="">浙江省</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="quiz2">
-                    <option value="">请选择</option>
-                    <option value="杭州">杭州</option>
+                    @foreach( $cate as $k => $v )
+                        <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -95,13 +91,14 @@
             <div class="layui-input-inline">
                 <select name="quiz4">
                     <option value="">请选择</option>
-                    @foreach( $position as $k => $v )
+                    @foreach( $type as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
                     @endforeach
                 </select>
+
             </div>
 
-            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
+            <button class="layui-btn" lay-filter="demo2" name="insertType">新增</button>
         </div>
 
         <div class="layui-form-item" style="">
@@ -109,13 +106,13 @@
             <div class="layui-input-inline">
                 <select name="quiz4">
                     <option value="">请选择</option>
-                    @foreach( $position as $k => $v )
+                    @foreach( $from as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
+            <button class="layui-btn" lay-filter="demo2" name="insertFrom">新增</button>
         </div>
 
         <div class="layui-form-item" style="">
@@ -123,13 +120,13 @@
             <div class="layui-input-inline">
                 <select name="quiz4">
                     <option value="">请选择</option>
-                    @foreach( $position as $k => $v )
+                    @foreach( $level as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <button class="layui-btn" lay-filter="demo2" name="insert">新增</button>
+            <button class="layui-btn" lay-filter="demo2" name="insertLevel">新增</button>
         </div>
 
         <div class="layui-form-item layui-form-text">
@@ -275,6 +272,123 @@
                         id: 'addPosition',
                         type: 1,
                         title: '新增职位',
+                        content: content,
+                        area: ['30vw', '25vh'],   //  vw设置宽  vh设置高
+                        offset: ['40vh', '35vw']  //  vh设置上下间距  vw设置左右间距
+                    });
+
+                    // top.winui.window.msg("选择框带联动的,尽情享用", {
+                    //     time: 2000
+                    // });
+                },
+                error: function (xml) {
+                    layer.close(index);
+                    top.winui.window.msg("获取页面失败", {
+                        icon: 2,
+                        time: 2000
+                    });
+                    console.log(xml.responseText);
+                }
+            });
+
+
+        });
+
+
+        //新增客户类型
+        $('[name=insertType]').click(function () {
+
+            // 打开新增页面
+            $.ajax({
+                type: 'get',
+                url: 'http://www.crm.com/insertType',
+                async: true,
+                success: function (data) {
+                    // layer.close(index);
+                    content = data;
+                    //从桌面打开
+                    top.winui.window.open({
+                        id: 'addType',
+                        type: 1,
+                        title: '新增客户类型',
+                        content: content,
+                        area: ['30vw', '25vh'],   //  vw设置宽  vh设置高
+                        offset: ['40vh', '35vw']  //  vh设置上下间距  vw设置左右间距
+                    });
+
+                    // top.winui.window.msg("选择框带联动的,尽情享用", {
+                    //     time: 2000
+                    // });
+                },
+                error: function (xml) {
+                    layer.close(index);
+                    top.winui.window.msg("获取页面失败", {
+                        icon: 2,
+                        time: 2000
+                    });
+                    console.log(xml.responseText);
+                }
+            });
+
+
+        });
+
+
+        //新增客户来源
+        $('[name=insertFrom]').click(function () {
+
+            // 打开新增页面
+            $.ajax({
+                type: 'get',
+                url: 'http://www.crm.com/insertFrom',
+                async: true,
+                success: function (data) {
+                    // layer.close(index);
+                    content = data;
+                    //从桌面打开
+                    top.winui.window.open({
+                        id: 'addFrom',
+                        type: 1,
+                        title: '新增客户来源',
+                        content: content,
+                        area: ['30vw', '25vh'],   //  vw设置宽  vh设置高
+                        offset: ['40vh', '35vw']  //  vh设置上下间距  vw设置左右间距
+                    });
+
+                    // top.winui.window.msg("选择框带联动的,尽情享用", {
+                    //     time: 2000
+                    // });
+                },
+                error: function (xml) {
+                    layer.close(index);
+                    top.winui.window.msg("获取页面失败", {
+                        icon: 2,
+                        time: 2000
+                    });
+                    console.log(xml.responseText);
+                }
+            });
+
+
+        });
+
+
+        //新增客户级别
+        $('[name=insertLevel]').click(function () {
+
+            // 打开新增页面
+            $.ajax({
+                type: 'get',
+                url: 'http://www.crm.com/insertLevel',
+                async: true,
+                success: function (data) {
+                    // layer.close(index);
+                    content = data;
+                    //从桌面打开
+                    top.winui.window.open({
+                        id: 'addLevel',
+                        type: 1,
+                        title: '新增客户级别',
                         content: content,
                         area: ['30vw', '25vh'],   //  vw设置宽  vh设置高
                         offset: ['40vh', '35vw']  //  vh设置上下间距  vw设置左右间距

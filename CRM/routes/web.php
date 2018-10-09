@@ -87,6 +87,31 @@ Route::get( 'insertPosition' , 'UserController@insertPosition' );
 Route::post( 'insertPositionDo' , 'UserController@insertPositionDo' );
 
 
+# 新增客户类型
+Route::get( 'insertType' , 'UserController@insertType' );
+
+
+# 执行新增客户类型
+Route::post( 'insertTypeDo' , 'UserController@insertTypeDo' );
+
+
+
+# 新增客户来源
+Route::get( 'insertFrom' , 'UserController@insertFrom' );
+
+
+# 执行新增客户来源
+Route::post( 'insertFromDo' , 'UserController@insertFromDo' );
+
+
+# 新增客户级别
+Route::get( 'insertLevel' , 'UserController@insertLevel' );
+
+
+# 执行新增客户级别
+Route::post( 'insertLevelDo' , 'UserController@insertLevelDo' );
+
+
 # 查询地址
 Route::get( 'areaUser' , 'UserController@areaUser' );
 

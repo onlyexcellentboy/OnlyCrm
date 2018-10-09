@@ -110,14 +110,26 @@ class UserController extends CommonController
 
         # 循环将类型变为数组的键
         $position_info = [];
+        $type_info = [];
+        $from_info = [];
+        $level_info = [];
+        $cate_info = [];
         foreach ( $info as $k => $v ){
             if( $v['select_type'] == 4 ){
                 $position_info[] = $v;
+            }elseif ( $v['select_type'] == 1 ){
+                $type_info[] = $v;
+            }elseif ( $v['select_type'] == 2 ){
+                $from_info[] = $v;
+            }elseif ( $v['select_type'] == 3 ){
+                $level_info[] = $v;
+            }elseif ( $v['select_type'] == 14 ){
+                $cate_info[] = $v;
             }
 
         }
 
-//        print_r( $position_info );exit;
+//        print_r( $type_info );exit;
 
         # 查询条件
             $area_where = [
@@ -139,7 +151,14 @@ class UserController extends CommonController
 //        }
 
 
-        return view( 'user.insertUser' , ['position' => $position_info , 'area' => $area ] );
+        return view( 'user.insertUser' , [
+            'position' => $position_info ,
+            'area' => $area,
+            'type' => $type_info,
+            'from' => $from_info,
+            'level' => $level_info,
+            'cate' => $cate_info
+        ] );
     }
 
 
@@ -219,6 +238,196 @@ class UserController extends CommonController
             $data = [
                 'select_name' => $position,
                 'select_type' => 4,
+                'status' => 1,
+                'ctime' => time(),
+                'utime' => time()
+            ];
+
+            # 执行添加
+            if( DB::table( 'crm_select') -> insertGetId( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '操作失败，请重试' );
+            }
+        }else{
+            return $this -> fail( '该职位已存在，请勿重复操作' );
+        }
+
+    }
+
+
+    # 新增客户类型
+    public function insertType(){
+        return view( 'user.insertType' );
+    }
+
+
+    # 执行新增客户类型
+    public function insertTypeDo( Request $request ){
+        # 接收职位
+        $type = $request -> input( 'type' );
+
+//        echo $position;
+
+        # 验证职位
+        if( !$type ){
+            return $this -> fail( '请输入客户类型' );
+        }
+
+        if( is_numeric( $type ) ){
+            return $this -> fail( '输入的格式不正确，请重新输入' );
+        }
+
+        # 查询条件
+        $where = [
+            'select_name' => $type,
+            'select_type' => 1
+        ];
+
+
+        # 验证该职位是否已存在
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select( 'select_id' )
+            -> first();
+
+        # 转为数组格式
+        $info = $this -> jsonToArray( $info );
+
+//        print_r( $info );exit;
+
+        if( empty($info ) ){
+
+            # 添加职位到数据库
+            $data = [
+                'select_name' => $type,
+                'select_type' => 1,
+                'status' => 1,
+                'ctime' => time(),
+                'utime' => time()
+            ];
+
+            # 执行添加
+            if( DB::table( 'crm_select') -> insertGetId( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '操作失败，请重试' );
+            }
+        }else{
+            return $this -> fail( '该职位已存在，请勿重复操作' );
+        }
+
+    }
+
+
+    # 新增客户来源
+    public function insertFrom(){
+        return view( 'user.insertFrom' );
+    }
+
+    # 执行新增客户来源
+    public function insertFromDo( Request $request ){
+        # 接收来源
+        $from = $request -> input( 'from' );
+
+//        echo $position;
+
+        # 验证职位
+        if( !$from ){
+            return $this -> fail( '请输入客户来源' );
+        }
+
+        if( is_numeric( $from ) ){
+            return $this -> fail( '输入的格式不正确，请重新输入' );
+        }
+
+        # 查询条件
+        $where = [
+            'select_name' => $from,
+            'select_type' => 2
+        ];
+
+
+        # 验证该职位是否已存在
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select( 'select_id' )
+            -> first();
+
+        # 转为数组格式
+        $info = $this -> jsonToArray( $info );
+
+//        print_r( $info );exit;
+
+        if( empty($info ) ){
+
+            # 添加职位到数据库
+            $data = [
+                'select_name' => $from,
+                'select_type' => 2,
+                'status' => 1,
+                'ctime' => time(),
+                'utime' => time()
+            ];
+
+            # 执行添加
+            if( DB::table( 'crm_select') -> insertGetId( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '操作失败，请重试' );
+            }
+        }else{
+            return $this -> fail( '该职位已存在，请勿重复操作' );
+        }
+
+    }
+
+
+    # 新增客户级别
+    public function insertLevel(){
+        return view( 'user.insertLevel' );
+    }
+
+    # 执行新增客户级别
+    public function insertLevelDo( Request $request ){
+        # 接收级别
+        $level = $request -> input( 'level' );
+
+//        echo $position;
+
+        # 验证职位
+        if( !$level ){
+            return $this -> fail( '请输入客户级别' );
+        }
+
+        if( is_numeric( $level ) ){
+            return $this -> fail( '输入的格式不正确，请重新输入' );
+        }
+
+        # 查询条件
+        $where = [
+            'select_name' => $level,
+            'select_type' => 3
+        ];
+
+
+        # 验证该职位是否已存在
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select( 'select_id' )
+            -> first();
+
+        # 转为数组格式
+        $info = $this -> jsonToArray( $info );
+
+//        print_r( $info );exit;
+
+        if( empty($info ) ){
+
+            # 添加职位到数据库
+            $data = [
+                'select_name' => $level,
+                'select_type' => 3,
                 'status' => 1,
                 'ctime' => time(),
                 'utime' => time()
