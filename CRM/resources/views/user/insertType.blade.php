@@ -9,7 +9,7 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">新增类型</label>
             <div class="layui-input-inline">
-                <input type="text" name="type" lay-verify="required" placeholder="请输入客户类型名称" autocomplete="off" class="layui-input">
+                <input type="text" name="type_name" lay-verify="required" placeholder="请输入客户类型名称" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -61,7 +61,7 @@
         // 提交数据
         $('[name=type]').click(function () {
             // 获取管理员名称
-            var type = $('[name=type]').val();
+            var type = $('[name=type_name]').val();
 
 //            alert( position );return false;
             // 判断名称不为空
