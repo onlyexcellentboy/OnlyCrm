@@ -32,6 +32,9 @@
                     <option value="">请选择县/区</option>
                 </select>
             </div>
+            <div class="layui-input-inline">
+                <input type="text" name="admin_psd" lay-verify="required" autocomplete="off" class="layui-input" placeholder="精确地址">
+            </div>
         </div>
 
 
