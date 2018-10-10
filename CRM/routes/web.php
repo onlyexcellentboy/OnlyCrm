@@ -28,6 +28,15 @@ Route::get( '/' , 'LoginController@login_list' );
 # 登录
 Route::post( 'checkLogin' , 'LoginController@checkLogin' );
 
+# 微博登录
+Route::get( 'wbLogin' , 'LoginController@wbLogin' );
+
+# 执行微博登录
+Route::get( 'wbLoginDo' , 'LoginController@wbLoginDo' );
+
+# 查询微博用户信息
+Route::get( 'userInfo' , 'LoginController@userInfo' );
+
 # 系统菜单
 Route::get( 'systemMenu' , 'SystemController@menuList' );
 

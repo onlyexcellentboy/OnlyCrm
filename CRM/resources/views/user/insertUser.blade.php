@@ -501,7 +501,7 @@
             //表单数据
             var info = data.field;
 
-            
+
             return false; //阻止表单跳转
         });
     });

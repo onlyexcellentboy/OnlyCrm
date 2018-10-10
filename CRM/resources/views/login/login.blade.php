@@ -22,11 +22,7 @@
     });
 </script>
 <!--SIGN UP-->
-<h1>CRM客户管理系统
-<br/>账号 zhangsan
-    <br>
-    密码：123123
-</h1>
+<h1>CRM客户管理系统</h1>
 <div class="login-form">
     <div class="close"> </div>
     <div class="head-info">
@@ -44,6 +40,7 @@
             <input type="password" value="" name="psd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
         </div>
     </form>
+    <a href="https://api.weibo.com/oauth2/authorize?client_id=711488263&redirect_uri=http://www.crm.com/wbLogin" name="weibo" target="_blank">微博登录</a>
     <div class="signin">
         <input type="submit" value="登录" name="submit"/>
     </div>
@@ -104,6 +101,15 @@
 //
         });
 
+
+        //微博登录
+//        $('[name=weibo]').click(function () {
+//            $.ajax({
+//                url:'https://api.weibo.com/oauth2/authorize?client_id=711488263&redirect_uri=http://www.crm.com/',
+//                type:'get',
+//            });
+//
+//        })
 
 //    });
 </script>
