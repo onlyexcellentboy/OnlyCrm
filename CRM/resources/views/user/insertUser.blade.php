@@ -417,81 +417,81 @@
 
 
         // 提交数据
-        $('[name=play]').click(function () {
-            // 获取管理员名称
-            var account = $('[name=admin_account]').val();
+        {{--$('[name=play]').click(function () {--}}
+            {{--// 获取管理员名称--}}
+            {{--var account = $('[name=admin_account]').val();--}}
 
-            // 判断名称不为空
-            if( account === '' ){
-                winui.window.msg( '管理员名称不能为空' );
-                return false
-            }
+            {{--// 判断名称不为空--}}
+            {{--if( account === '' ){--}}
+                {{--winui.window.msg( '管理员名称不能为空' );--}}
+                {{--return false--}}
+            {{--}--}}
 
-            // 获取密码
-            var psd = $('[name=admin_psd]').val();
+            {{--// 获取密码--}}
+            {{--var psd = $('[name=admin_psd]').val();--}}
 
-            // 判断密码不为空
-            if( psd === '' ){
-                winui.window.msg( '管理员密码不能为空' );
-                return false;
-            }
+            {{--// 判断密码不为空--}}
+            {{--if( psd === '' ){--}}
+                {{--winui.window.msg( '管理员密码不能为空' );--}}
+                {{--return false;--}}
+            {{--}--}}
 
-            // 判断密码长度  ---- 未完结
-//            if( strlen(psd) <= 6 ){
-//                winui.window.msg( '管理员密码不能少于6位' );
-//                return false;
-//            }
+            {{--// 判断密码长度  ---- 未完结--}}
+{{--//            if( strlen(psd) <= 6 ){--}}
+{{--//                winui.window.msg( '管理员密码不能少于6位' );--}}
+{{--//                return false;--}}
+{{--//            }--}}
 
-            // 获取确认密码
-            var confirm_psd = $('[name=confirm_psd]').val();
+            {{--// 获取确认密码--}}
+            {{--var confirm_psd = $('[name=confirm_psd]').val();--}}
 
-            // 判断确认密码不为空
-            if( confirm_psd === '' ){
-                winui.window.msg( '确认密码不能为空' );
-                return false;
-            }
+            {{--// 判断确认密码不为空--}}
+            {{--if( confirm_psd === '' ){--}}
+                {{--winui.window.msg( '确认密码不能为空' );--}}
+                {{--return false;--}}
+            {{--}--}}
 
-            //判断密码和确认密码一致
-            if( psd != confirm_psd ){
-                winui.window.msg( '确认密码必须和密码一致' );
-                return false;
-            }
+            {{--//判断密码和确认密码一致--}}
+            {{--if( psd != confirm_psd ){--}}
+                {{--winui.window.msg( '确认密码必须和密码一致' );--}}
+                {{--return false;--}}
+            {{--}--}}
 
-            // 获取手机号
-            var tel = $('[name=admin_tel]').val();
+            {{--// 获取手机号--}}
+            {{--var tel = $('[name=admin_tel]').val();--}}
 
-            // 判断手机号不为空
-            if( tel === '' ){
-                winui.window.msg( '手机号码不能为空' );
-                return false;
-            }
-
-
-            // 获取是否实名
-            var is_real = $('[name=is_real]:checked').val();
+            {{--// 判断手机号不为空--}}
+            {{--if( tel === '' ){--}}
+                {{--winui.window.msg( '手机号码不能为空' );--}}
+                {{--return false;--}}
+            {{--}--}}
 
 
-            // 获取是否启用
-            var show = $('[name=show]:checked').val();
-
-            $.ajax({
-                url:'insertAdminDo',
-                data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&show='+show+'&_token='+'{{csrf_token()}}',
-                type:'post',
-                dataType:'json',
-                async:false,
-                success:function ( json_info ) {
-                    if( json_info.status == 1000 ){
-                        winui.window.msg( '添加成功了，可以登录了' );
-                    }else{
-                        winui.window.msg( json_info.msg );
-                    }
-
-                }
-            });
+            {{--// 获取是否实名--}}
+            {{--var is_real = $('[name=is_real]:checked').val();--}}
 
 
-        });
+            {{--// 获取是否启用--}}
+            {{--var show = $('[name=show]:checked').val();--}}
+
+            {{--$.ajax({--}}
+                {{--url:'insertAdminDo',--}}
+                {{--data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&show='+show+'&_token='+'{{csrf_token()}}',--}}
+                {{--type:'post',--}}
+                {{--dataType:'json',--}}
+                {{--async:false,--}}
+                {{--success:function ( json_info ) {--}}
+                    {{--if( json_info.status == 1000 ){--}}
+                        {{--winui.window.msg( '添加成功了，可以登录了' );--}}
+                    {{--}else{--}}
+                        {{--winui.window.msg( json_info.msg );--}}
+                    {{--}--}}
+
+                {{--}--}}
+            {{--});--}}
+
+
+        {{--});--}}
 
 
         // 表单提交
@@ -500,9 +500,35 @@
 
             //表单数据
             var info = data.field;
+//console.log( info );return false;
+            $.ajax({
+                url:'insertUserDo',
+                type:'post',
+                data:'name='+info.user_name+'&province='+info.province+'&city='+info.city+'&area='+info.area+
+                '&detail='+info.detail+'&contact='+info.contact+'&position='+info.position+'&contact_tel='+info.contact_tel+
+                '&phone='+info.phone+'&cate='+info.cate+'&type='+info.type+'&from='+info.from+'&level='+info.level+
+                '&remark='+info.remark+'&_token='+'{{csrf_token()}}'
+                ,
+                dataType:'json',
+                async:false,
+                success:function ( json_info ) {
+                    if( json_info.status == 1000 ){
+                        msg('添加成功', {
+                            icon: 1,
+                            time: 2000
+                        });
+                        winui.window.close('addUser');
+                    }else{
+                        msg(json_info.msg, {
+                            icon: 2,
+                            time: 1500
+                        });
+                    }
+                }
 
+            });
 
-            return false; //阻止表单跳转
+//            return false; //阻止表单跳转
         });
     });
 

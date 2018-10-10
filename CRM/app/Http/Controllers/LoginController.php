@@ -106,7 +106,7 @@ class LoginController extends Controller
 //            $user_info = $this -> wbLoginDo( $user_url );
 
             # 调用查询用户信息接口
-            $user_info = header( 'location:' . $user_url . '?access_token='.$token.'&screen_name='.'冯天乐23310' );
+            $user_info = header( 'location:' . $user_url . '?access_token='.$token.'&uid='.$data['uid'] );
 
             print_r( $user_info );
         }else{

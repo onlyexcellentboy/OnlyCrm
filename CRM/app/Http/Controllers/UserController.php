@@ -162,6 +162,160 @@ class UserController extends CommonController
     }
 
 
+    # 执行新增客户
+    public function insertUserDo( Request $request ){
+        # 接收客户名称
+        $info['user_name'] = $request -> input( 'name' );
+
+        # 判断客户名称是否合法
+        if( !$info['user_name'] ){
+            return $this -> fail( '请输入客户名称' );
+        }
+
+        # 接收省份
+        $info['province'] = $request -> input( 'province' );
+
+        if( !$info['province'] ){
+            return $this -> fail( '请选择省份' );
+        }
+
+
+        # 接收市区
+        $info['city'] = $request -> input( 'city' );
+
+        if( !$info['city'] ){
+            return $this -> fail( '请选择市区' );
+        }
+
+
+        # 接收县/区
+        $info['area'] = $request -> input( 'area' );
+
+        if( !$info['area'] ){
+            return $this -> fail( '请选择县/区' );
+        }
+
+
+        # 接收详细地址
+        $info['area_detail'] = $request -> input( 'detail' );
+
+        if( !$info['area_detail'] ){
+            return $this -> fail( '请输入详细地址' );
+        }
+
+
+        # 接收联系人
+        $info['admin_name'] = $request -> input( 'contact' );
+
+        if( !$info['admin_name'] ){
+            return $this -> fail( '请输入联系人' );
+        }
+
+
+        # 接收职位
+        $info['place'] = $request -> input( 'position' );
+
+        if( !$info['place'] ){
+            return $this -> fail( '请选择职位' );
+        }
+
+
+        # 接收联系电话    ----  管理员的电话
+        $info['admin_phone'] = $request -> input( 'contact_tel' );
+
+        if( !$info['admin_phone'] ){
+            return $this -> fail( '请输入联系电话' );
+        }
+
+
+        # 接收手机号码    ----  客户的手机号码
+        $info['user_phone'] = $request -> input( 'phone' );
+
+        if( !$info['user_phone'] ){
+            return $this -> fail( '请输入手机号码' );
+        }
+
+
+        # 接收产品分类
+        $info['cate'] = $request -> input( 'cate' );
+
+        if( !$info['cate'] ){
+            return $this -> fail( '请选择产品分类' );
+        }
+
+
+        # 接收客户类型
+        $info['user_type'] = $request -> input( 'type' );
+
+        if( !$info['user_type'] ){
+            return $this -> fail( '请选择客户类型' );
+        }
+
+
+        # 接收客户来源
+        $info['user_from'] = $request -> input( 'from' );
+
+        if( !$info['user_from'] ){
+            return $this -> fail( '请选择客户来源' );
+        }
+
+
+        # 接收客户级别
+        $info['user_level'] = $request -> input( 'level' );
+
+        if( !$info['user_level'] ){
+            return $this -> fail( '请选择客户级别' );
+        }
+
+
+        # 接收备注
+        $info['user_remark'] = $request -> input( 'remark' );
+
+        if( !$info['user_remark'] ){
+            return $this -> fail( '请选择备注' );
+        }
+
+        $info['status'] = 1;
+        $info['ctime'] = time();
+        $info['utime'] = time();
+
+//        print_r( $info );
+
+        # 先查询数据库判断客户是否已存在
+
+        # 查询条件
+        $where = [
+            'user_name' => $info['user_name']
+        ];
+
+        # 执行查询数据库
+        $user_info = DB::table( 'crm_user' )
+            -> where( $where )
+            -> orWhere( 'user_phone' , '=' , $info['user_phone'])
+            -> select( 'user_id' )
+            -> first();
+
+        # 转为数组格式
+        $user_info = $this -> jsonToArray( $user_info );
+
+//        print_r( $user_info );
+
+        # 判断数组是否为空  --  如果不为空说明该客户或手机号已经存在
+        if( !empty( $user_info ) ){
+            return $this -> fail( '该客户名称或手机号已经存在' );
+        }
+
+
+        # 执行添加客户
+        if( DB::table( 'crm_user') -> insertGetId( $info ) ){
+            return $this -> success();
+        }else{
+            return $this -> fail( '操作失败，请重试' );
+        }
+
+    }
+
+
     # 地址数据
     public function areaUser( Request $request ){
         # 接收省市区父级id

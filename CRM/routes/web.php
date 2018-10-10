@@ -88,6 +88,10 @@ Route::get( 'userDel' , 'UserController@userDel' );
 # 新增客户
 Route::get( 'insertUser' , 'UserController@insertUser' );
 
+
+# 执行新增客户
+Route::post( 'insertUserDo' , 'UserController@insertUserDo' );
+
 # 新增职位
 Route::get( 'insertPosition' , 'UserController@insertPosition' );
 
