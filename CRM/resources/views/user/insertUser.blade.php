@@ -8,14 +8,14 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">客户名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_account" lay-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                <input type="text" name="user_name" lay-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">详细地址</label>
             <div class="layui-input-inline">
-                <select lay-filter="selected">
+                <select lay-filter="selected" lay-verify="required" name="province">
                     <option value="">请选择省</option>
                     @foreach( $area as $k => $v )
                     <option value="{{$v['id']}}">{{$v['area_name']}}</option>
@@ -23,17 +23,17 @@
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select lay-filter="city" name="city">
+                <select lay-filter="city" lay-verify="required" name="city">
                     <option value="">请选择市</option>
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="area">
+                <select lay-verify="required" name="area">
                     <option value="">请选择县/区</option>
                 </select>
             </div>
             <div class="layui-input-inline">
-                <input type="text" name="admin_psd" lay-verify="required" autocomplete="off" class="layui-input" placeholder="精确地址">
+                <input type="text" name="detail" lay-verify="required" autocomplete="off" class="layui-input" placeholder="精确地址">
             </div>
         </div>
 
@@ -41,14 +41,14 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">联系人</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_psd" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="contact" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item" style="">
             <label class="layui-form-label">职位</label>
             <div class="layui-input-inline">
-                <select name="quiz4">
+                <select lay-verify="required" name="position">
                     <option value="">请选择</option>
                     @foreach( $position as $k => $v )
                     <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
@@ -62,14 +62,14 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">联系电话</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input" placeholder="联系人联系电话"/>
+                <input type="text" name="contact_tel" lay-verify="phone" autocomplete="off" class="layui-input" placeholder="联系人联系电话"/>
             </div>
         </div>
 
         <div class="layui-form-item" style="">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-inline">
-                <input type="text" name="admin_tel" lay-verify="required" autocomplete="off" class="layui-input" placeholder="客户手机号"/>
+                <input type="text" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" placeholder="客户手机号"/>
             </div>
         </div>
 
@@ -77,7 +77,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">产品分类</label>
             <div class="layui-input-inline">
-                <select name="quiz1">
+                <select lay-verify="required" name="cate">
                     <option value="">请选择</option>
                     @foreach( $cate as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
@@ -89,7 +89,7 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">客户类型</label>
             <div class="layui-input-inline">
-                <select name="quiz4">
+                <select lay-verify="required" name="type">
                     <option value="">请选择</option>
                     @foreach( $type as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
@@ -104,7 +104,7 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">客户来源</label>
             <div class="layui-input-inline">
-                <select name="quiz4">
+                <select lay-verify="required" name="from">
                     <option value="">请选择</option>
                     @foreach( $from as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
@@ -118,7 +118,7 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">客户级别</label>
             <div class="layui-input-inline">
-                <select name="quiz4">
+                <select lay-verify="required" name="level">
                     <option value="">请选择</option>
                     @foreach( $level as $k => $v )
                         <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>
@@ -132,7 +132,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注其他</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
             </div>
         </div>
 
@@ -256,6 +256,7 @@
 
         });
 
+
         //新增职位
         $('[name=insert]').click(function () {
 
@@ -334,6 +335,7 @@
         });
 
 
+
         //新增客户来源
         $('[name=insertFrom]').click(function () {
 
@@ -373,6 +375,7 @@
         });
 
 
+
         //新增客户级别
         $('[name=insertLevel]').click(function () {
 
@@ -410,6 +413,7 @@
 
 
         });
+
 
 
         // 提交数据
@@ -487,6 +491,18 @@
             });
 
 
+        });
+
+
+        // 表单提交
+        form.on('submit(demo1)', function(data){
+//            console.log(data.field); //当前容器的全部表单字段，名值对形式：{name: value}
+
+            //表单数据
+            var info = data.field;
+
+            
+            return false; //阻止表单跳转
         });
     });
 
