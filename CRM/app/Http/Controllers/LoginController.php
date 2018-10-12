@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
@@ -68,7 +69,7 @@ class LoginController extends Controller
 
 
     # 微博登录
-    public function wbLogin(){
+    public function wbLogin( Request $request ){
         # 接收临时令牌
         $code = $_GET['code'];
 
@@ -87,7 +88,7 @@ class LoginController extends Controller
         $url = 'https://api.weibo.com/oauth2/access_token';
 
         # 调用请求方法
-        $data =  $this -> wbLoginDo( $url , $params );
+        $data =  $this -> curl( $url , $params );
 
         # 转为数组格式
         $data = json_decode(  $data , true );
@@ -101,14 +102,26 @@ class LoginController extends Controller
             $token = $data['access_token'];
 
             # 查询用户信息接口url
-            $user_url = 'https://api.weibo.com/2/users/show.json';
-
-//            $user_info = $this -> wbLoginDo( $user_url );
+            $user_url = 'https://api.weibo.com/2/users/show.json?access_token='.$token.'&uid='.$data['uid'];
 
             # 调用查询用户信息接口
-            $user_info = header( 'location:' . $user_url . '?access_token='.$token.'&uid='.$data['uid'] );
+            $user_info = $this -> wbLoginDo( $user_url );
 
-            print_r( $user_info );
+            # 调用查询用户信息接口
+//            $user_info = header( 'location:' . $user_url . '?access_token='.$token.'&uid='.$data['uid'] );
+
+
+            # 将用户信息转为数组
+            $user_info = json_decode( $user_info , true );
+//            print_r( $user_info );
+
+            # 判断用户信息不为空的情况下选择绑定账号
+            if( !empty( $user_info['id'] && $user_info['screen_name'] ) ){
+//              return  redirect() -> route('wbBinding');
+                return $this -> wbBinding( $user_info['id'] , $user_info['screen_name'] );
+            }else{
+                return '该用户不存在';
+            }
         }else{
 
             return '非法请求';
@@ -117,9 +130,30 @@ class LoginController extends Controller
     }
 
 
-    # 执行微博登录
-    public function wbLoginDo( $url,$vars = [] ){
+    # curl 请求 --- 1
+    public function wbLoginDo( $url,$data = '' ){
 
+        $ch = curl_init();
+        $params[CURLOPT_URL] = $url;    //请求url地址
+        $params[CURLOPT_HEADER] = false; //是否返回响应头信息
+        $params[CURLOPT_RETURNTRANSFER] = true; //是否将结果返回
+        $params[CURLOPT_FOLLOWLOCATION] = true; //是否重定向
+        $params[CURLOPT_TIMEOUT] = 30; //超时时间
+        if(!empty($data)){
+            $params[CURLOPT_POST] = true;
+            $params[CURLOPT_POSTFIELDS] = $data;
+        }
+        $params[CURLOPT_SSL_VERIFYPEER] = false;//请求https时设置,还有其他解决方案
+        $params[CURLOPT_SSL_VERIFYHOST] = false;//请求https时,其他方案查看其他博文
+        curl_setopt_array($ch, $params); //传入curl参数
+        $content = curl_exec($ch); //执行
+        curl_close($ch); //关闭连接
+        return $content;
+    }
+
+
+    # curl 请求 ---- 2
+    public function curl( $url,$vars ){
         $ch = curl_init();
         $params[CURLOPT_URL] = $url;    //请求url地址
         $params[CURLOPT_HEADER] = false; //是否返回响应头信息
@@ -131,6 +165,9 @@ class LoginController extends Controller
         foreach ($vars as $key => $value){
             $postfields .= urlencode($key) . '=' . urlencode($value) . '&';
         }
+
+        $postfields = rtrim( $postfields , '&' );
+
         $params[CURLOPT_POST] = true;
         $params[CURLOPT_POSTFIELDS] = $postfields;
 
@@ -139,8 +176,146 @@ class LoginController extends Controller
         $params[CURLOPT_SSL_VERIFYHOST] = false;
 
         curl_setopt_array($ch, $params); //传入curl参数
-        return  curl_exec($ch); //执行
+        $res = curl_exec($ch); //执行
+
+//        print_r( $res );
+        return $res;
     }
 
+
+    public function test( Request $request ){
+        return $request -> header();
+    }
+
+
+    # 微博登录绑定系统账号
+    public function wbBinding( $id , $name ){
+//        echo $id;
+//
+//        echo $name;
+
+        # 先根据接到的微博id查询数据库
+
+        # 查询条件
+        $where = [
+            'wb_id' => $id
+        ];
+
+        # 执行查询
+        $info = DB::table( 'crm_admin' )
+            -> where( $where )
+            -> select( 'admin_id' , 'wb_id' , 'wb_name' )
+            -> first();
+
+        # 转成数组格式
+        $info = json_decode( json_encode( $info ) , true );
+
+//         print_r( $info );
+
+        if( empty( $info['wb_id'] && $info['wb_name'] ) ){
+            return view( 'login.wbBinding' , ['id' => $id , 'name' => $name] );
+        }else{
+            return redirect() -> route('index' );
+        }
+
+
+    }
+
+
+    # 执行微博登录绑定系统账号
+    public function wbBindingDo( Request $request ){
+        # 接收微博id
+        $wb_id = $request -> input( 'wb_id' );
+
+        # 验证微博id
+        if( !$wb_id ){
+            return json_encode( ['status' => 100 , 'msg' => '操作有误'] );
+        }
+
+        # 接收微博昵称
+        $wb_name = $request -> input( 'wb_name' );
+
+        # 验证微博昵称
+        if( !$wb_name ){
+            return json_encode( ['status' => 100 , 'msg' => '非法操作'] );
+        }
+
+
+        # 接收用户名
+        $user = $request -> input( 'username' );
+
+        # 验证用户名
+        if( !$user ){
+            return json_encode( ['status' => 100 , 'msg' => '请输入用户名'] );
+        }
+
+
+        # 接收密码
+        $psd = $request -> input( 'psd' );
+
+        # 验证密码
+        if( !$psd ){
+            return json_encode( ['status' => 100 , 'msg' => '请输入密码'] );
+        }
+
+
+        # 先根据接到的用户名查询是否有该用户    再验证密码是否正确
+
+        # 查询条件
+        $where = [
+            'admin_account' => $user
+        ];
+
+        # 查询用户信息
+        $user_info = DB::table( 'crm_admin' )
+            -> where( $where )
+            -> select( 'admin_id' , 'admin_pas' )
+            -> first();
+
+        # 转为数组格式
+        $user_info = json_decode( json_encode( $user_info ) , true );
+
+//        print_r( $user_info );
+
+        # 判断数据是否为空
+        if( empty( $user_info ) ){
+            return  json_encode( ['status' => 100 , 'msg' => '该用户不存在，请确认输入是否正确'] );
+        }
+
+        # 验证密码是否正确
+
+        # 生成密码
+        $pwd = md5( $psd . $user );
+
+//        echo $pwd;
+
+        # 验证密码是否正确
+        if( $pwd != $user_info['admin_pas'] ){
+
+            return  json_encode( ['status' => 100 , 'msg' => '用户名或密码不正确'] );
+        }else{
+
+            # 要入库的数据
+            $data = [
+                'wb_id' => $wb_id,
+                'wb_name' => $wb_name
+            ];
+
+            # 条件
+            $save_where = [
+                'admin_id' => $user_info['admin_id']
+            ];
+
+//            print_r( $data );exit;
+
+            if( DB::table( 'crm_admin') -> where( $save_where ) -> update( $data ) ){
+                return  json_encode( ['status' => 1000 , 'msg' => 'success'] );
+            }else{
+                return  json_encode( ['status' => 100 , 'msg' => '操作失败，请重试'] );
+            }
+
+        }
+
+    }
 
 }

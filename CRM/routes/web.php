@@ -14,7 +14,7 @@
 # 首页
 Route::get('index', function () {
     return view('index');
-});
+})->name('index');
 
 # 角色列表
 Route::get( 'role' , 'RoleController@roleList' );
@@ -36,6 +36,15 @@ Route::get( 'wbLoginDo' , 'LoginController@wbLoginDo' );
 
 # 查询微博用户信息
 Route::get( 'userInfo' , 'LoginController@userInfo' );
+
+
+# 微博登录绑定系统账号
+Route::get( 'wbBinding' , 'LoginController@wbBinding' );
+
+
+# 执行微博登录绑定系统账号
+Route::post( 'wbBindingDo' , 'LoginController@wbBindingDo' );
+
 
 # 系统菜单
 Route::get( 'systemMenu' , 'SystemController@menuList' );
@@ -146,3 +155,5 @@ Route::get( 'power' , 'PowerController@powerList' );
 
 # 权限编辑
 Route::get( 'powerEdit' , 'PowerController@powerEdit' );
+
+Route::get( 'test' , 'LoginController@test' );

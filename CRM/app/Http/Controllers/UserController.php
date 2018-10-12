@@ -32,6 +32,31 @@ class UserController extends CommonController
             -> where( $where )
             -> count();
 
+        # 循环将省市区赋给一维数
+        foreach ( $info as $k => $v ){
+            $area[] = $v['province'];
+            $area[] = $v['city'];
+            $area[] = $v['area'];
+        }
+
+        # 根据用户中的省市区id查询数据
+        $area_info = DB::table( 'crm_area' )
+            -> whereIn( 'id' , $area )
+            -> select( 'id' , 'area_name' )
+            -> get();
+
+        # 转成数组格式
+        $area_info = $this -> jsonToArray( $area_info );
+
+
+        foreach ( $info as $kk => $vv ){
+           foreach ( $area_info as $key => $value ){
+               if( $vv['province'] == $value['id']){
+                   $vv['province'] = $value['area_name'];
+               }
+            }
+        }
+
 //        print_r( $info );
         return $this -> show( $count , $info );
     }
