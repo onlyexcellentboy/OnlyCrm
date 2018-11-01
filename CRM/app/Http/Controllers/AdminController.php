@@ -16,15 +16,24 @@ class AdminController extends CommonController
     public function adminData(){
         # 查询数据条件
         $where = [
-            'admin_status' => 1
+            'admin_status' => 2
         ];
 
         # 执行查询数据
         $info = DB::table( 'crm_admin' )
             -> where( $where )
-            -> select( 'admin_id' , 'admin_account' , 'admin_phone' , 'last_login' )
+            -> select( 'admin_id' , 'admin_name' , 'admin_phone' , 'last_login' )
             -> get();
 
+        # 转为数组格式
+        $info = $this -> jsonToArray( $info );
+
+        # 循环将时间 戳转换为日期格式
+        foreach ( $info as $k => $v ){
+            $info[$k]['last_login'] = date( 'Y-m-d H:i:s' , $v['last_login'] );
+        }
+
+//        print_r( $info );exit;
         # 查询总条数
         $count = DB::table( 'crm_admin' )
             -> where( $where )
@@ -36,9 +45,7 @@ class AdminController extends CommonController
 
 //        print_r( $info );
         # 拼接返回的json数据
-        $admin_info = $this -> show( $count , $info ) ;
-
-        return json_encode( $admin_info );
+        return $this -> show( $count , $info ) ;
     }
 
 

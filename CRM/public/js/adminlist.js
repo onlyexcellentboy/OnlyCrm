@@ -23,9 +23,9 @@
         cols: [[
             { field: 'admin_id', type: 'checkbox' },
             { field: 'admin_id', title: 'id', width: 120 },
-            { field: 'admin_account', title: '名称', width: 120 },
-            { field: 'admin_phone', title: '手机', width: 120 },
-            { field: 'last_login', title: '最后一次登录', width: 120, templet: '#stateTpl' },
+            { field: 'admin_name', title: '名称', width: 120 },
+            { field: 'admin_phone', title: '联系方式', width: 120 },
+            { field: 'last_login', title: '最后一次登录', width: 160, templet: '#stateTpl' },
             { title: '操作', fixed: 'right', align: 'center', toolbar: '#barRole', width: 120 }
         ]]
     });
@@ -120,7 +120,7 @@
     }
     //删除角色
     function deleteRole(ids, obj) {
-        var msg = obj ? '确认删除管理员【' + obj.data.admin_account + '】吗？' : '确认删除选中数据吗？'
+        var msg = obj ? '确认删除管理员【' + obj.data.admin_name + '】吗？' : '确认删除选中数据吗？'
         top.winui.window.confirm(msg, { icon: 3, title: '删除系统管理员' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令

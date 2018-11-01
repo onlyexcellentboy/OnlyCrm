@@ -33,14 +33,14 @@ class LoginController extends Controller
 
         # 查询条件
         $where = [
-            'admin_account' => $account,
-            'admin_status' => 1
+            'admin_name' => $account,
+            'admin_status' => 2
         ];
 
         # 根据输入的用户名查询数据库
         $info = DB::table( 'crm_admin' )
             -> where( $where )
-            -> select( 'admin_account' , 'admin_pas' )
+            -> select( 'admin_name' , 'admin_pas' )
             -> first();
 
 //        print_r( $info );
@@ -268,7 +268,7 @@ class LoginController extends Controller
 
         # 查询条件
         $where = [
-            'admin_account' => $user
+            'admin_name' => $user
         ];
 
         # 查询用户信息

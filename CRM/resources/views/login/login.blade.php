@@ -94,7 +94,7 @@
                 async:false,
                 success:function ( json_info ) {
                     if( json_info.status == 1000 ){
-                        alert( json_info );
+//                        alert( json_info );
                         window.location.href = 'index';
                     }else{
                         alert( json_info.msg );
