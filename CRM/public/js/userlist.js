@@ -32,7 +32,7 @@
             { field: 'user_phone', title: '联系电话', width: 120, templet: '#stateTpl' },
             { field: 'user_from', title: '客户来源', width: 90, templet: '#stateTpl' },
             { field: 'admin_name', title: '联系人', width: 80, templet: '#stateTpl' },
-            { field: 'place', title: '职位', width: 80, templet: '#stateTpl' },
+            { field: 'place', title: '职位', width: 86, templet: '#stateTpl' },
             { field: 'admin_phone', title: '手机号码', width: 120, templet: '#stateTpl' },
             { field: 'ctime', title: '录入时间', width: 110 },
             { title: '操作', fixed: 'right', align: 'center', toolbar: '#barRole', width: 120 }
@@ -66,8 +66,8 @@
                         type: 1,
                         title: '编辑客户',
                         content: content,
-                        area: ['60vw', '70vh'],
-                        offset: ['15vh', '20vw'],
+                        area: ['65vw', '70vh'],
+                        offset: ['15vh', '18vw'],
                     });
                     top.winui.window.msg("选择框带联动的,尽情享用", {
                         time: 2000

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -61,8 +61,13 @@ class LoginController extends Controller
         if( $password != $info['admin_pas'] ){
             return json_encode( ['status' => 100, 'msg' => '用户名或密码有误'] );
         }else{
-//            Cookie::queue( 'user' , $info , 180 );
-            return json_encode( ['status' => 1000, 'msg' => '登录成功'] );
+//            $request -> cookie( 'userInfo' , $info )
+//            print_r( $info );exit;
+//            if( Session::put( 'userInfo' , $info ) ){
+
+                return json_encode( ['status' => 1000, 'msg' => '登录成功'] );
+//            }
+
         }
 
     }
@@ -312,6 +317,59 @@ class LoginController extends Controller
                 return  json_encode( ['status' => 1000 , 'msg' => 'success'] );
             }else{
                 return  json_encode( ['status' => 100 , 'msg' => '操作失败，请重试'] );
+            }
+
+        }
+
+    }
+
+
+    # 第三方登录
+    public function elseLogin(){
+        # 接收临时令牌
+        $code = $_GET['code'];
+
+        # 请求参数
+        $params = [
+            'appid' => 1952145219,
+            'app_secret' => '1974sa521v4b25g4b12g5b1h421bgvg9',
+            'type' => 'oauth',
+            'code' => $code,
+            'rederect_url' => 'http://www.crm.com/elseLogin'
+        ];
+
+        # 请求地址
+        $url = 'http://188.131.133.134/createToken';
+
+        # 调用接口
+        $token = $this -> wbLoginDo( $url , $params );
+
+        # 将返回的数据转为数组格式
+        $token = json_decode( $token , true );
+
+//        print_r( $token );
+
+        # 判断返回的数据中存在token并且不为空
+        if( !empty( $token['access_token'] ) ){
+            # 请求地址
+            $user_url = 'http://188.131.133.134/showUser?access_token='.$token['access_token'] . '&uid=' . $token['uid'];
+
+            # 调用查询用户信息接口
+            $userInfo = $this -> wbLoginDo( $user_url );
+
+
+            # 转成数组形式
+            $userInfo = json_decode( $userInfo , true );
+
+//            print_r( $userInfo );
+
+            # 判断返回的数据不为空
+            if( !empty( $userInfo['user_phone'] ) ){
+                #添加到数据库
+                if( DB::table( 'crm_user' ) -> insert( $userInfo) ){
+                    return redirect() -> route( 'index' );
+                }
+
             }
 
         }

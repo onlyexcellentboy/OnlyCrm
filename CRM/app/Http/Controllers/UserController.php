@@ -33,12 +33,14 @@ class UserController extends CommonController
             -> count();
 
         # 循环将省市区赋给一维数
+        $area = [];
         foreach ( $info as $k => $v ){
             $area[] = $v['province'];
             $area[] = $v['city'];
             $area[] = $v['area'];
         }
 
+//        print_r( $area );exit;
         # 根据用户中的省市区id查询数据
         $area_info = DB::table( 'crm_area' )
             -> whereIn( 'id' , $area )
@@ -49,22 +51,197 @@ class UserController extends CommonController
         $area_info = $this -> jsonToArray( $area_info );
 
 
-        foreach ( $info as $kk => $vv ){
-           foreach ( $area_info as $key => $value ){
-               if( $vv['province'] == $value['id']){
-                   $vv['province'] = $value['area_name'];
-               }
-            }
+//        print_r( $area_info );exit;
+        # 将省市区的id变为下标
+        $arr = [];
+        foreach ( $area_info as $kk => $vv ){
+            $arr[$vv['id']] = $vv['area_name'];
         }
 
-//        print_r( $info );
+//        print_r( $info );exit;
+
+        # 循环将客户类型赋给一维数组
+        $type = [];
+        foreach ($info as $down => $up ){
+            $type[] = $up['user_type'];
+        }
+
+//        print_r( $type );exit;
+
+        # 根据用户数据中的客户类型id查询对应的数据
+        $user_type = DB::table( 'crm_select')
+            -> whereIn( 'select_id' , $type )
+            -> where( ['select_type' => 1 ] )
+            -> select( 'select_name' , 'select_id' )
+            -> get();
+
+//        print_r( $user_type );exit;
+        # 转为数组格式
+        $user_type = $this -> jsonToArray( $user_type );
+
+        # 循环将类型放入一维数组中
+        $userType = [];
+        foreach ( $user_type as $kkk => $vvv ){
+            $userType [$vvv['select_id']] = $vvv['select_name'];
+        }
+
+//        print_r( $userType );exit;
+
+        # 循环将客户来源id放入一维数组
+        $form = [];
+        $place = [];
+        foreach ( $info as $i => $t ){
+            $form [] = $t['user_from'];
+            $place [] = $t['place'];
+        }
+
+//        print_r( $form );exit;
+
+        # 根据客户来源id查询对应的数据
+        $formInfo = DB::table( 'crm_select' )
+            -> whereIn( 'select_id' , $form )
+            -> select( 'select_id' , 'select_name' )
+            -> get();
+
+        # 转成数组格式
+        $formInfo = $this -> jsonToArray( $formInfo );
+
+//        print_r( $formInfo );exit;
+
+        # 循环将id变为下标
+        $userForm = [];
+        foreach ( $formInfo as $kkkk => $vvvv ){
+            $userForm [$vvvv['select_id']] = $vvvv['select_name'];
+        }
+
+//        print_r( $place );exit;
+        # 根据职位id查询对应的数据
+        $placeInfo = DB::table( 'crm_select' )
+            -> whereIn( 'select_id' , $place )
+            -> select( 'select_id' , 'select_name' )
+            -> get();
+
+        # 转为数组格式
+        $placeInfo = $this -> jsonToArray( $placeInfo );
+
+//        print_r( $placeInfo );exit;
+
+        # 循环将职位id变为下标
+        $userPlace = [];
+        foreach ( $placeInfo as $id => $name ){
+            $userPlace [$name['select_id']] = $name['select_name'];
+        }
+
+//        print_r( $userPlace );exit;
+
+        foreach ( $info as $key => $value ){
+            if( $value['user_type'] == $userType[$value['user_type']] ){
+                $info[$key]['user_type'] = $userType[$value];
+            }
+
+            if( $value['user_from'] == $userForm[$value['user_from']] ){
+                $info[$key]['user_from'] = $userForm[$value];
+            }
+
+            if( $value['place'] == $userPlace[$value['place']] ){
+                $info[$key]['place'] = $userPlace[$value];
+            }
+
+            if( $value['province'] == $arr[$value['province']] ){
+                $info[$key]['province'] = $arr[$value];
+            }
+
+            if( $value['city'] == $arr[$value['city']] ){
+                $info[$key]['city'] = $arr[$value];
+            }
+
+            if( $value['area'] == $arr[$value['area']] ){
+                $info[$key]['area'] = $arr[$value];
+            }
+
+            $info[$key]['province'] = $arr[$value['province']];
+            $info[$key]['city'] = $arr[$value['city']];
+            $info[$key]['area'] = $arr[$value['area']];
+            $info[$key]['user_type'] = $userType[$value['user_type']];
+            $info[$key]['user_from'] = $userForm[$value['user_from']];
+            $info[$key]['place'] = $userPlace[$value['place']];
+        }
+
+//        print_r( $info );exit;
         return $this -> show( $count , $info );
     }
 
 
     # 编辑客户
     public function userEdit(){
-        return view( 'user/userEdit' );
+
+        # 查询条件
+        $where = [
+            'status' => 1
+        ];
+
+        # 执行查询下拉框数据
+        $info = DB::table( 'crm_select' )
+            -> where( $where )
+            -> select(  'select_id' ,'select_name' , 'select_type' )
+            -> get();
+
+        # 转成数组格式
+        $info = $this -> jsonToArray( $info );
+
+
+        # 循环将类型变为数组的键
+        $position_info = [];
+        $type_info = [];
+        $from_info = [];
+        $level_info = [];
+        $cate_info = [];
+        foreach ( $info as $k => $v ){
+            if( $v['select_type'] == 4 ){
+                $position_info[] = $v;
+            }elseif ( $v['select_type'] == 1 ){
+                $type_info[] = $v;
+            }elseif ( $v['select_type'] == 2 ){
+                $from_info[] = $v;
+            }elseif ( $v['select_type'] == 3 ){
+                $level_info[] = $v;
+            }elseif ( $v['select_type'] == 14 ){
+                $cate_info[] = $v;
+            }
+
+        }
+
+//        print_r( $type_info );exit;
+
+        # 查询条件
+        $area_where = [
+            'area_parent_id' => 0
+        ];
+
+        # 查询省数据
+        $area = DB::table( 'crm_area' )
+            -> where( $area_where )
+            -> select( 'id' , 'area_name' , 'area_parent_id' )
+            -> get();
+
+        # 转成数组格式
+        $area = $this -> jsonToArray( $area );
+
+//        print_r( $area );exit;
+//        if( !empty( $area ) ){
+//           $this -> success( '' , $area );
+//        }
+
+
+        return view( 'user.userEdit' , [
+            'position' => $position_info ,
+            'area' => $area,
+            'type' => $type_info,
+            'from' => $from_info,
+            'level' => $level_info,
+            'cate' => $cate_info
+        ] );
+
     }
 
     # 删除客户（修改状态）

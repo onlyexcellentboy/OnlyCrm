@@ -10,7 +10,7 @@
     <link href='http://fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
     <!--//webfonts-->
-    <script src="http://ajax.useso.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 <script>$(document).ready(function(c) {
@@ -40,7 +40,10 @@
             <input type="password" value="" name="psd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
         </div>
     </form>
-    <a href="https://api.weibo.com/oauth2/authorize?client_id=711488263&redirect_uri=http://www.crm.com/wbLogin" name="weibo" target="_blank">微博登录</a>
+    {{--<a href="https://api.weibo.com/oauth2/authorize?client_id=711488263&redirect_uri=http://www.crm.com/wbLogin" name="weibo">微博登录</a>--}}
+
+    <a href="http://188.131.133.134/oauth?client_id=711488263&redirect_uri=http://www.crm.com/elseLogin">其他登录</a>
+
     <div class="signin">
         <input type="submit" value="登录" name="submit"/>
     </div>
@@ -91,6 +94,7 @@
                 async:false,
                 success:function ( json_info ) {
                     if( json_info.status == 1000 ){
+                        alert( json_info );
                         window.location.href = 'index';
                     }else{
                         alert( json_info.msg );

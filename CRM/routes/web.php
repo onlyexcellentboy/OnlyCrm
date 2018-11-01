@@ -46,6 +46,10 @@ Route::get( 'wbBinding' , 'LoginController@wbBinding' );
 Route::post( 'wbBindingDo' , 'LoginController@wbBindingDo' );
 
 
+# 第三方登录
+Route::any( 'elseLogin' , 'LoginController@elseLogin' ) -> name( 'oauthLogin' );
+
+
 # 系统菜单
 Route::get( 'systemMenu' , 'SystemController@menuList' );
 
@@ -157,3 +161,7 @@ Route::get( 'power' , 'PowerController@powerList' );
 Route::get( 'powerEdit' , 'PowerController@powerEdit' );
 
 Route::get( 'test' , 'LoginController@test' );
+
+
+# 查询订单信息
+Route::get( 'orderInfo' , 'OrderController@orderInfo' );

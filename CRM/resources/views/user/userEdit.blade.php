@@ -30,7 +30,7 @@
 <ins class="adsbygoogle" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
 
 <div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
-<div style="width:860px;margin:0 auto;padding-top:20px;">
+<div style="width:860px;padding-top:20px;">
     <form class="layui-form layui-form-pane" action="">
         <input type="hidden" name="id" value="3" />
         <div class="layui-form-item">
@@ -39,6 +39,32 @@
                 <input type="text" name="roleName" win-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input" value="&#x8D85;&#x7EA7;&#x7BA1;&#x7406;&#x5458;" />
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细地址</label>
+            <div class="layui-input-inline">
+                <select lay-filter="selected" lay-verify="required" name="province">
+                    <option value="">请选择省</option>
+                    @foreach( $area as $k => $v )
+                        <option value="{{$v['id']}}">{{$v['area_name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select lay-filter="city" lay-verify="required" name="city">
+                    <option value="">请选择市</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select lay-verify="required" name="area">
+                    <option value="">请选择县/区</option>
+                </select>
+            </div>
+            <div class="layui-input-inline"  style="width:144px;">
+                <input type="text" name="detail" lay-verify="required" style="width:144px;" autocomplete="off" class="layui-input" placeholder="精确地址">
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">角色描述</label>
             <div class="layui-input-block">
