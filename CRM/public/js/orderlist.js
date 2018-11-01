@@ -90,7 +90,7 @@
 
         $.ajax({
             type: 'get',
-            url: 'http://www.crm.com/insertAdmin',
+            url: 'http://www.crm.com/insertOrder',
             async: true,
             success: function (data) {
                 // layer.close(index);
@@ -120,10 +120,11 @@
         });
 
     }
-    //删除角色
+
+    //删除订单
     function deleteRole(ids, obj) {
-        var msg = obj ? '确认删除角色【' + obj.data.admin_id + '】吗？' : '确认删除选中数据吗？'
-        top.winui.window.confirm(msg, { icon: 3, title: '删除系统角色' }, function (index) {
+        var msg = obj ? '确认删除订单【' + obj.data.order_name + '】吗？' : '确认删除选中数据吗？'
+        top.winui.window.confirm(msg, { icon: 3, title: '删除系统订单' }, function (index) {
             layer.close(index);
             //向服务端发送删除指令
             //刷新表格
@@ -141,8 +142,9 @@
             }
         });
     }
+
     //绑定按钮事件
-    $('#addRole').on('click', addRole);
+    $('#addOrder').on('click', addRole);
     $('#deleteRole').on('click', function () {
         var checkStatus = table.checkStatus(tableId);
         var checkCount = checkStatus.data.length;

@@ -77,6 +77,10 @@ Route::get( 'adminDel' , 'AdminController@adminDel' );
 # 订单列表
 Route::get( 'order' , 'OrderController@orderList' );
 
+
+# 新增订单
+Route::get( 'insertOrder' , 'OrderController@insertOrder' );
+
 # 合同列表
 Route::get( 'pact' , 'PactController@pactList' );
 

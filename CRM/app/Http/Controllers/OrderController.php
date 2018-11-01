@@ -86,4 +86,10 @@ class OrderController extends CommonController
             return $this -> show( $count , $orderInfo );
     }
 
+
+    # 新增订单
+    public function insertOrder(){
+        return view( 'order.addOrder' );
+    }
+
 }
