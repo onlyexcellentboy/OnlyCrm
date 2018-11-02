@@ -116,6 +116,48 @@ class OrderController extends CommonController
             return $this -> fail( '请选择订单联系人' );
         }
 
+        # 判断订单联系人是否为整型
+        if( !is_numeric( $data['admin_id'] ) ){
+            return $this -> fail( '订单联系人格式有误' );
+        }
+
+        # 接收下单日期
+        $data['create_time'] = $request -> input( 'create_time' );
+
+        # 判断下单日期是否为空
+        if( empty( $data['create_time'] ) ){
+            return $this -> fail( '请选择下单日期' );
+        }
+
+        # 将日期转为时间戳
+        $data['create_time'] = strtotime( $data['create_time'] );
+
+//        echo $data['create_time'];
+        # 判断是否为时间戳
+        if( !is_numeric( $data['create_time']) && strlen( $data['create_time'] != 11 ) ){
+            return $this -> fail( '请选择正确的下单日期' );
+        }
+
+
+        # 接收交单日期
+        $data['submit_time'] = $request -> input( 'submit_time' );
+
+        # 判断交单日期是否为空
+        if( empty( $data['submit_time'] ) ){
+            return $this -> fail( '请选择交单日期' );
+        }
+
+        # 将日期转为时间戳
+        $data['submit_time'] = strtotime( $data['submit_time'] );
+
+//        echo $data['create_time'];
+        # 判断是否为时间戳
+        if( !is_numeric( $data['submit_time'] ) && strlen( $data['submit_time'] ) != 10 ){
+            return $this -> fail( '请选择正确的交单日期' );
+        }
+
+
+
     }
 
 }
