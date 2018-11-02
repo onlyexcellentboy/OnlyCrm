@@ -40,7 +40,7 @@ class LoginController extends Controller
         # 根据输入的用户名查询数据库
         $info = DB::table( 'crm_admin' )
             -> where( $where )
-            -> select( 'admin_name' , 'admin_pas' )
+            -> select( 'admin_id' , 'admin_name' , 'admin_pas' )
             -> first();
 
 //        print_r( $info );
@@ -63,10 +63,20 @@ class LoginController extends Controller
         }else{
 //            $request -> cookie( 'userInfo' , $info )
 //            print_r( $info );exit;
-//            if( Session::put( 'userInfo' , $info ) ){
+            $session = $request -> session() -> put( 'user_info' , $info );
+
+            # 取出session中的用户数据
+            $user_info = $request -> session() -> get( 'user_info' );
+
+//            print_r( $user_info );exit;
+
+            if( !empty( $user_info ) ){
 
                 return json_encode( ['status' => 1000, 'msg' => '登录成功'] );
-//            }
+            }else{
+
+                return json_encode( [ 'status' => 100 , 'msg' => '服务器异常，请重试' ] );
+            }
 
         }
 

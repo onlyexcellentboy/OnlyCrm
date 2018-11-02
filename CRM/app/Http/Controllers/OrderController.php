@@ -88,8 +88,34 @@ class OrderController extends CommonController
 
 
     # 新增订单
-    public function insertOrder(){
-        return view( 'order.addOrder' );
+    public function insertOrder( Request $request ){
+        # 取出session中的用户数据
+        $user_info[] = $request -> session() -> get( 'user_info' );
+
+//        print_r( $user_info );exit;
+
+        return view( 'order.addOrder' , [ 'user_info' => $user_info ] );
+    }
+
+
+    # 执行新增订单
+    public function insertOrderDo( Request $request ){
+        # 接收订单名称
+        $data['order_name'] = $request -> input( 'order_name' );
+
+        # 判断订单名称是否为空
+        if( empty( $data['order_name'] ) ){
+            return $this -> fail( '请填写订单名称' );
+        }
+
+        # 接收订单联系人
+        $data['admin_id'] = $request -> input( 'admin_id' );
+
+        # 判断订单联系人是否为空
+        if( empty( $data['admin_id'] ) ){
+            return $this -> fail( '请选择订单联系人' );
+        }
+
     }
 
 }

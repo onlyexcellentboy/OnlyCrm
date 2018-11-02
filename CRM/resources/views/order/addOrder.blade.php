@@ -2,7 +2,7 @@
 
 <div  class="layui-anim layui-anim-rotate layui-anim-up" data-anim="layui-anim-up">
     <fieldset class="layui-elem-field layui-field-title">
-        <legend>新增管理员</legend>
+        <legend>新增订单</legend>
     </fieldset>
     <div class="layui-form layui-form-pane">
         <div class="layui-form-item" style="">
@@ -15,12 +15,11 @@
         <div class="layui-form-item" style="">
             <label class="layui-form-label">订单联系人</label>
             <div class="layui-input-inline">
-                <select lay-verify="required" name="admin_id">
+                <select lay-verify="required" name="admin_id" disabled>
                     <option value="">请选择</option>
-{{--                    @foreach( $level as $k => $v )--}}
-{{--                        <option value="{{$v['select_id']}}">{{$v['select_name']}}</option>--}}
-                    <option value=""></option>
-                    {{--@endforeach--}}
+                    @foreach( $user_info as $k => $v )
+                        <option value="{{$v['admin_id']}}" selected>{{$v['admin_name']}}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -102,73 +101,72 @@
 
         // 提交数据
         $('.layui-btn').click(function () {
-            // 获取管理员名称
-            var account = $('[name=admin_account]').val();
+            // 获取订单名称
+            var order_name = $('[name=order_name]').val();
 
             // 判断名称不为空
-            if( account === '' ){
-                winui.window.msg( '管理员名称不能为空' );
+            if( order_name === '' ){
+                winui.window.msg( '请输入订单名称' );
                 return false
             }
 
-            // 获取密码
-            var psd = $('[name=admin_psd]').val();
+            // 获取订单联系人
+            var admin_id = $('[name=admin_id]').val();
 
-            // 判断密码不为空
-            if( psd === '' ){
-                winui.window.msg( '管理员密码不能为空' );
-                return false;
-            }
-
-            // 判断密码长度  ---- 未完结
-//            if( strlen(psd) <= 6 ){
-//                winui.window.msg( '管理员密码不能少于6位' );
-//                return false;
-//            }
-
-            // 获取确认密码
-            var confirm_psd = $('[name=confirm_psd]').val();
-
-            // 判断确认密码不为空
-            if( confirm_psd === '' ){
-                winui.window.msg( '确认密码不能为空' );
-                return false;
-            }
-
-            //判断密码和确认密码一致
-            if( psd != confirm_psd ){
-                winui.window.msg( '确认密码必须和密码一致' );
-                return false;
-            }
-
-            // 获取手机号
-            var tel = $('[name=admin_tel]').val();
-
-            // 判断手机号不为空
-            if( tel === '' ){
-                winui.window.msg( '手机号码不能为空' );
+//            alert( admin_id );return;
+            // 判断订单联系人不为空
+            if( admin_id === '' ){
+                winui.window.msg( '请选择订单联系人' );
                 return false;
             }
 
 
-            // 获取是否实名
-            var is_real = $('[name=is_real]:checked').val();
+            // 获取预付款
+            var imprest = $('[name=imprest]').val();
+
+            // 判断预付款不为空
+            if( imprest === '' ){
+                winui.window.msg( '请输入预付款金额' );
+                return false;
+            }
 
 
-            // 获取是否启用
-            var show = $('[name=show]:checked').val();
+            // 获取下单日期
+            var create_time = $('[name=create_time]').val();
+
+            // 判断下单不为空
+            if( create_time === '' ){
+                winui.window.msg( '请选择下单日期' );
+                return false;
+            }
+
+
+            // 获取交单日期
+            var submit_time = $('[name=submit_time]').val();
+
+            // 判断交单不为空
+            if( submit_time === '' ){
+                winui.window.msg( '请选择交单日期' );
+                return false;
+            }
+
+            // 获取是否完成
+            var status = $('[name=status]:checked').val();
 
             $.ajax({
-                url:'insertAdminDo',
-                data:'account='+account+'&psd='+psd+'&confirm_psd='+confirm_psd+'&tel='+tel+'&is_real='+is_real+'&show='+show+'&_token='+'{{csrf_token()}}',
+                url:'insertOrderDo',
+                data:'order_name='+order_name+'&admin_id='+admin_id+'&imprest='+imprest+'&create_time='+create_time+'&submit_time='+submit_time+'&status='+status+'&_token='+'{{csrf_token()}}',
                 type:'post',
                 dataType:'json',
                 async:false,
                 success:function ( json_info ) {
+
                     if( json_info.status == 1000 ){
-                        winui.window.msg( '添加成功了，可以登录了' );
+                        winui.window.msg( '订单添加成功' );
+                        return true;
                     }else{
                         winui.window.msg( json_info.msg );
+                        return false;
                     }
 
                 }
