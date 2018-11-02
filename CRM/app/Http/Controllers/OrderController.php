@@ -35,15 +35,10 @@ class OrderController extends CommonController
             $admin_id[] = $v['admin_id'];
         }
 
-        # 根据操作员id查询名称
-        $where = [
-            'admin_id' => $admin_id,
-            'admin_status' => 2
-        ];
-
         # 执行查询管理员数据
         $adminInfo = DB::table( 'crm_admin' )
-            -> where( $where )
+            -> whereIn( 'admin_id' , $admin_id )
+            -> where( ['admin_status' => 2] )
             -> select( 'admin_id' , 'admin_name' )
             ->get();
 
@@ -121,6 +116,20 @@ class OrderController extends CommonController
             return $this -> fail( '订单联系人格式有误' );
         }
 
+
+        # 接收预付款
+        $data['imprest'] = $request -> input( 'imprest' );
+
+        # 判断预付款是否为空
+        if( empty( $data['imprest'] ) ){
+            return $this -> fail( '请输入预付款金额' );
+        }
+
+        # 判断预付款是否为整型
+        if( !is_numeric( $data['imprest'] ) ){
+            return $this -> fail( '预付款金额格式有误' );
+        }
+
         # 接收下单日期
         $data['create_time'] = $request -> input( 'create_time' );
 
@@ -156,7 +165,31 @@ class OrderController extends CommonController
             return $this -> fail( '请选择正确的交单日期' );
         }
 
+        # 获取订单是否完成
+        $data['status'] = $request -> input( 'status' );
 
+        # 判断是否为空
+        if( empty( $data['status'] ) ){
+            return $this -> fail( '请选择是否完成' );
+        }
+
+        # 判断是否为整型
+        if( !is_numeric( $data['status'] ) ){
+            return $this -> fail( '是否完成格式有误' );
+        }
+
+//        print_r( $data );
+
+        # 判断入库的数据不为空的情况下入库
+        if( !empty( $data ) ){
+            # 执行添加订单
+            if( DB::table( 'crm_order' ) -> insertGetId( $data ) ){
+                return $this -> success();
+            }else{
+                return $this -> fail( '服务器异常，请稍后重试' );
+            }
+
+        }
 
     }
 
